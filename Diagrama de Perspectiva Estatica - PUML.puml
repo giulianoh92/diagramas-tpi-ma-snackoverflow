@@ -1,0 +1,239 @@
+@startuml
+title Perspectiva Estática - Meta-modelo del Proceso Híbrido (OpenUP / Scrum / SDD)
+
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam classFontStyle bold
+hide empty members
+hide circle
+
+skinparam class {
+    BackgroundColor<<proceso>> #3d3d3a
+    FontColor<<proceso>> #F1EFE8
+    BorderColor<<proceso>> #2C2C2A
+
+    BackgroundColor<<fase>> #c4a336
+    FontColor<<fase>> #1a1400
+    BorderColor<<fase>> #8a6f1f
+
+    BackgroundColor<<disciplina>> #c47b36
+    FontColor<<disciplina>> #1a0f00
+    BorderColor<<disciplina>> #7a4a1d
+
+    BackgroundColor<<rol>> #534AB7
+    FontColor<<rol>> #eeeeff
+    BorderColor<<rol>> #2c2570
+
+    BackgroundColor<<artefacto>> #36b3c4
+    FontColor<<artefacto>> #001a1e
+    BorderColor<<artefacto>> #1d6e7a
+
+    BackgroundColor<<evento>> #a45be9
+    FontColor<<evento>> #1a0033
+    BorderColor<<evento>> #6a2fa8
+}
+
+class "Meta-modelo del proceso\nde desarrollo global" as MetamodeloProceso <<proceso>>
+
+package "Fases (OpenUP)" as PkgFases {
+    class Fase <<fase>>
+    class "Inception" as FaseInception <<fase>>
+    class "Elaboración" as FaseElaboracion <<fase>>
+    class "Construcción" as FaseConstruccion <<fase>>
+    class "Transición" as FaseTransicion <<fase>>
+}
+
+package "Disciplinas" as PkgDisciplinas {
+    class Disciplina <<disciplina>>
+    class "Ing. Requerimientos" as DRequerimientos <<disciplina>>
+    class "Diseño" as DDiseno <<disciplina>>
+    class "Implementación" as DImplementacion <<disciplina>>
+    class "Verificación y Validación" as DVerificacion <<disciplina>>
+    class "Evolución" as DEvolucion <<disciplina>>
+}
+
+package "Roles" as PkgRoles {
+    class Rol <<rol>>
+    class "Administrador de Proyecto" as AdminProyecto <<rol>>
+    class Analista <<rol>>
+    class Arquitecto <<rol>>
+    class Tester <<rol>>
+    class "Equipo de Desarrollo" as EquipoDesarrollo <<rol>>
+    class Desarrollador <<rol>>
+
+    package "Roles SDD" as PkgRolesSDD {
+        class "Coordinador de IA" as CoordinadorIA <<rol>>
+        class "Sub-agente de Diseño" as SubDiseno <<rol>>
+        class "Sub-agente de Implementación" as SubImpl <<rol>>
+        class "Sub-agente de Verificación" as SubVerif <<rol>>
+    }
+}
+
+package "Artefactos" as PkgArtefactos {
+    class Artefacto <<artefacto>>
+
+    package "Requerimientos" as PkgArtReq {
+        class "Documento de Visión" as DocVision <<artefacto>>
+        class "Glosario del Dominio" as Glosario <<artefacto>>
+        class "Caso de Uso" as CasoUso <<artefacto>>
+        class "Especificación" as Especificacion <<artefacto>>
+        class "Lista de Riesgos" as ListaRiesgos <<artefacto>>
+        class "Work Item List" as WorkItemList <<artefacto>>
+        class "Sprint Backlog" as SprintBacklog <<artefacto>>
+        class "Especificación Ejecutable" as EspecEjecutable <<artefacto>>
+    }
+
+    package "Diseño" as PkgArtDis {
+        class "Vista 4+1" as Vista41 <<artefacto>>
+        class "ADR" as ADR <<artefacto>>
+        class "Diseño Detallado" as DisenioDetallado <<artefacto>>
+    }
+
+    package "Implementación" as PkgArtImpl {
+        class "Código Fuente" as CodigoFuente <<artefacto>>
+        class "Micro-incremento" as MicroIncremento <<artefacto>>
+        class Incremento <<artefacto>>
+    }
+
+    package "V&V" as PkgArtVV {
+        class "Criterios de Aceptación" as CriteriosAceptacion <<artefacto>>
+        class "Test Automatizado" as TestAutomatizado <<artefacto>>
+        class "Definition of Done" as DoD <<artefacto>>
+    }
+
+    package "Evolución" as PkgArtEvo {
+        class "Memoria Persistente" as MemoriaPersistente <<artefacto>>
+    }
+}
+
+package "Eventos" as PkgEventos {
+    class Evento <<evento>>
+    class "Evento Planificado" as EventoPlanificado <<evento>>
+    class Sprint <<evento>>
+    class "Sprint Planning" as SprintPlanning <<evento>>
+}
+
+' Composiciones del metamodelo
+MetamodeloProceso *-- Fase
+MetamodeloProceso *-- Disciplina
+MetamodeloProceso *-- Rol
+MetamodeloProceso *-- Artefacto
+MetamodeloProceso *-- Evento
+
+' Herencia Fases
+Fase <|-- FaseInception
+Fase <|-- FaseElaboracion
+Fase <|-- FaseConstruccion
+Fase <|-- FaseTransicion
+
+' Herencia Disciplinas
+Disciplina <|-- DRequerimientos
+Disciplina <|-- DDiseno
+Disciplina <|-- DImplementacion
+Disciplina <|-- DVerificacion
+Disciplina <|-- DEvolucion
+
+' Herencia Roles
+Rol <|-- AdminProyecto
+Rol <|-- Analista
+Rol <|-- Arquitecto
+Rol <|-- Tester
+Rol <|-- EquipoDesarrollo
+EquipoDesarrollo <|-- Desarrollador
+EquipoDesarrollo <|-- CoordinadorIA
+CoordinadorIA *-- SubDiseno : gestiona
+CoordinadorIA *-- SubImpl : gestiona
+CoordinadorIA *-- SubVerif : gestiona
+
+' Herencia Artefactos
+Artefacto <|-- DocVision
+Artefacto <|-- Glosario
+Artefacto <|-- CasoUso
+Artefacto <|-- Especificacion
+Artefacto <|-- ListaRiesgos
+Artefacto <|-- WorkItemList
+Artefacto <|-- SprintBacklog
+Artefacto <|-- EspecEjecutable
+Artefacto <|-- Vista41
+Artefacto <|-- ADR
+Artefacto <|-- DisenioDetallado
+Artefacto <|-- CodigoFuente
+Artefacto <|-- MicroIncremento
+Artefacto <|-- Incremento
+Artefacto <|-- CriteriosAceptacion
+Artefacto <|-- TestAutomatizado
+Artefacto <|-- DoD
+Artefacto <|-- MemoriaPersistente
+
+' Composiciones entre artefactos
+Especificacion *-- CasoUso
+EspecEjecutable o-- CriteriosAceptacion
+MemoriaPersistente *-- ADR
+Incremento *-- MicroIncremento
+
+' Herencia Eventos
+Evento <|-- EventoPlanificado
+EventoPlanificado <|-- Sprint
+Sprint *-- SprintPlanning
+Sprint *-- SprintBacklog
+
+' Disciplina -> Artefactos / Roles primarios
+DRequerimientos ..> CasoUso : produce
+DRequerimientos ..> DocVision : produce
+DRequerimientos ..> Glosario : mantiene
+DRequerimientos ..> ListaRiesgos : mantiene
+DRequerimientos ..> EspecEjecutable : produce
+DRequerimientos ..> WorkItemList : alimenta
+DRequerimientos ..> Analista : involucra
+
+DDiseno ..> Vista41 : produce
+DDiseno ..> ADR : registra
+DDiseno ..> DisenioDetallado : produce
+DDiseno ..> Arquitecto : involucra
+DDiseno ..> SubDiseno : involucra
+
+DImplementacion ..> CodigoFuente : produce
+DImplementacion ..> MicroIncremento : produce
+DImplementacion ..> Incremento : produce
+DImplementacion ..> Sprint : opera en
+DImplementacion ..> SprintBacklog : usa
+DImplementacion ..> Desarrollador : involucra
+DImplementacion ..> SubImpl : involucra
+DImplementacion ..> CoordinadorIA : involucra
+
+DVerificacion ..> TestAutomatizado : produce
+DVerificacion ..> CriteriosAceptacion : verifica
+DVerificacion ..> DoD : aplica
+DVerificacion ..> Tester : involucra
+DVerificacion ..> SubVerif : involucra
+
+DEvolucion ..> EspecEjecutable : versiona
+DEvolucion ..> MemoriaPersistente : actualiza
+
+' Rol -> Artefacto (produce/usa)
+Analista --> ListaRiesgos : genera
+Analista --> DocVision : genera
+Analista --> Especificacion : genera
+Analista --> Glosario : mantiene
+Arquitecto --> Vista41 : genera
+Arquitecto --> ADR : registra
+SubDiseno --> DisenioDetallado : genera
+SubImpl --> EspecEjecutable : consume
+SubImpl --> CodigoFuente : genera
+SubVerif --> TestAutomatizado : genera
+Tester --> TestAutomatizado : valida
+EquipoDesarrollo --> Incremento : produce
+Desarrollador --> MicroIncremento : produce
+Desarrollador --> DisenioDetallado : revisa
+
+' Artefacto <-> Artefacto / Evento
+Especificacion --> CriteriosAceptacion : deriva
+TestAutomatizado --> CriteriosAceptacion : basado en
+MemoriaPersistente --> EspecEjecutable : versiona
+SprintBacklog --> WorkItemList : derivado de
+Sprint --> Incremento : produce
+DoD --> Incremento : valida
+
+@enduml
