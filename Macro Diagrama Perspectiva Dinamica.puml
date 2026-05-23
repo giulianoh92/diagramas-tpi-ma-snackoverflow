@@ -1,0 +1,53 @@
+@startuml
+|Analista / Arquitecto|
+start
+:Revisar Work Item List;
+:Seleccionar work items\npara la iteración;
+:Redactar Iteration Plan\ncon criterios de aceptación;
+:Redactar Especificación\nEjecutable;
+
+|Desarrollador|
+:Revisar Spec Ejecutable\n[HITL];
+if (¿Spec válida?) then (No)
+    :Solicitar corrección;
+    |Analista / Arquitecto|
+    :Corregir Spec;
+    :Redactar Especificación\nEjecutable;
+    |Desarrollador|
+endif
+
+|Analista / Arquitecto|
+if (¿Spec aprobada?) then (No)
+    :Corregir Spec;
+else (Sí)
+endif
+
+|Desarrollador|
+:Ejecutar Pipeline SDD;
+:Revisar artefactos\ngenerados por IA [HITL];
+if (¿Artefactos aprobados?) then (No)
+    :Ejecutar Pipeline SDD;
+else (Sí)
+endif
+:Integrar incremento;
+
+|Tester|
+:Ejecutar pruebas\nde integración;
+:Verificar Definition\nof Done por ítem;
+if (¿Todos los ítems\ncumplen DoD?) then (No)
+    :Marcar ítem como\nno terminado;
+    |Analista / Arquitecto|
+    :Revisar Work Item List;
+    |Tester|
+else (Sí)
+endif
+:Iteration Assessment\ncon el equipo;
+if (¿Incremento aceptado?) then (No)
+    |Analista / Arquitecto|
+    :Revisar Work Item List;
+    |Tester|
+else (Sí)
+endif
+:Actualizar Memoria\nPersistente;
+stop
+@enduml
