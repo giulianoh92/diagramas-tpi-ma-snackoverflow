@@ -179,38 +179,8 @@ EventoPlanificado <|-- Sprint
 Sprint *-- SprintPlanning
 Sprint *-- SprintBacklog
 
-' Disciplina -> Artefactos / Roles primarios
-DRequerimientos ..> CasoUso : produce
-DRequerimientos ..> DocVision : produce
-DRequerimientos ..> Glosario : mantiene
-DRequerimientos ..> ListaRiesgos : mantiene
-DRequerimientos ..> EspecEjecutable : produce
-DRequerimientos ..> WorkItemList : alimenta
-DRequerimientos ..> Analista : involucra
-
-DDiseno ..> Vista41 : produce
-DDiseno ..> ADR : registra
-DDiseno ..> DisenioDetallado : produce
-DDiseno ..> Arquitecto : involucra
-DDiseno ..> SubDiseno : involucra
-
-DImplementacion ..> CodigoFuente : produce
-DImplementacion ..> MicroIncremento : produce
-DImplementacion ..> Incremento : produce
-DImplementacion ..> Sprint : opera en
-DImplementacion ..> SprintBacklog : usa
-DImplementacion ..> Desarrollador : involucra
-DImplementacion ..> SubImpl : involucra
-DImplementacion ..> CoordinadorIA : involucra
-
-DVerificacion ..> TestAutomatizado : produce
-DVerificacion ..> CriteriosAceptacion : verifica
-DVerificacion ..> DoD : aplica
-DVerificacion ..> Tester : involucra
-DVerificacion ..> SubVerif : involucra
-
-DEvolucion ..> EspecEjecutable : versiona
-DEvolucion ..> MemoriaPersistente : actualiza
+' (Categorización Disciplina -> Artefactos representada visualmente
+'  por los sub-packages dentro de Artefactos, no por flechas)
 
 ' Rol -> Artefacto (produce/usa)
 Analista --> ListaRiesgos : genera
