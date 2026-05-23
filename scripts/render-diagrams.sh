@@ -44,6 +44,7 @@ render_plantuml() {
   echo "→ plantuml: $src"
   if docker run --rm \
       -u "$(id -u):$(id -g)" \
+      -e PLANTUML_LIMIT_SIZE=16384 \
       -v "$PWD:/data" \
       "$PLANTUML_IMAGE" \
       -tpng \
