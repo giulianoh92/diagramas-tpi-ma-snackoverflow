@@ -1,10 +1,17 @@
 @startuml
+title Sprint (1 semana) - Iteración del proceso híbrido OpenUP / Scrum / SDD
+
 |Analista / Arquitecto|
 start
 :Revisar Work Item List;
-:Seleccionar work items\npara la iteración;
+:Revisar Lista de Riesgos\nde la iteración;
+:Sprint Planning:\nSeleccionar work items del\nSprint Backlog;
 :Redactar Iteration Plan\ncon criterios de aceptación;
 :Redactar Especificación\nEjecutable;
+if (¿Requiere decisión\narquitectónica?) then (Sí)
+    :Registrar ADR\nen Memoria Persistente;
+else (No)
+endif
 
 |Desarrollador|
 :Revisar Spec Ejecutable\n[HITL];
@@ -22,17 +29,25 @@ if (¿Spec aprobada?) then (No)
 else (Sí)
 endif
 
+|Coordinador IA|
+:Ejecutar Pipeline SDD\n(Sub-agentes Diseño /\nImplementación);
+
 |Desarrollador|
-:Ejecutar Pipeline SDD;
 :Revisar artefactos\ngenerados por IA [HITL];
 if (¿Artefactos aprobados?) then (No)
-    :Ejecutar Pipeline SDD;
+    |Coordinador IA|
+    :Re-ejecutar Pipeline SDD;
+    |Desarrollador|
 else (Sí)
 endif
-:Integrar incremento;
+:Integrar micro-incremento\nal producto del sprint;
+
+|Sub-agente Verificador|
+:Validar código vs Spec\n(verificación automática);
 
 |Tester|
 :Ejecutar pruebas\nde integración;
+:Validar intención del usuario\n(spec vs comportamiento);
 :Verificar Definition\nof Done por ítem;
 if (¿Todos los ítems\ncumplen DoD?) then (No)
     :Marcar ítem como\nno terminado;
@@ -41,13 +56,13 @@ if (¿Todos los ítems\ncumplen DoD?) then (No)
     |Tester|
 else (Sí)
 endif
+
+|Analista / Arquitecto|
 :Iteration Assessment\ncon el equipo;
 if (¿Incremento aceptado?) then (No)
-    |Analista / Arquitecto|
     :Revisar Work Item List;
-    |Tester|
 else (Sí)
 endif
-:Actualizar Memoria\nPersistente;
+:Actualizar Memoria Persistente\n(decisiones, descubrimientos);
 stop
 @enduml
