@@ -1,0 +1,196 @@
+---
+config:
+   layout: elk
+   class:
+       hideEmptyMembersBox: true
+---
+classDiagram
+
+
+class MetamodeloProceso["Meta-modelo del proceso de desarrollo global"]:::proceso {
+   <<proceso>>
+}
+
+
+class Fase["Fase"]:::fase {
+   <<fase>>
+}
+class FaseInception["Inception"]:::fase {
+   <<fase>>
+}
+class FaseElaboracion["Elaboración"]:::fase {
+   <<fase>>
+}
+class FaseConstruccion["Construcción"]:::fase {
+   <<fase>>
+}
+class FaseTransicion["Transición"]:::fase {
+   <<fase>>
+}
+
+
+class Rol["Rol"]:::rol {
+   <<rol>>
+}
+class Analista["Analista"]:::rol {
+   <<rol>>
+}
+class Arquitecto["Arquitecto"]:::rol {
+   <<rol>>
+}
+class Tester["Tester"]:::rol {
+   <<rol>>
+}
+class EquipoDesarrollo["Equipo de Desarrollo"]:::rol {
+   <<rol>>
+}
+class CoordinadorIA["Coordinador de IA"]:::rol {
+   <<rol>>
+}
+class SubagenteDiseno["Subagente de Diseño"]:::rol {
+   <<rol>>
+}
+class SubagenteImplementacion["Subagente de Implementación"]:::rol {
+   <<rol>>
+}
+class SubagenteVerificacion["Subagente de Verificación"]:::rol {
+   <<rol>>
+}
+class Desarrollador["Desarrollador"]:::rol {
+   <<rol>>
+}
+
+
+class Artefacto["Artefacto"]:::artefacto {
+   <<artefacto>>
+}
+class DocumentoVision["Documento de Visión"]:::artefacto {
+   <<artefacto>>
+}
+class CasoUso["Caso de Uso"]:::artefacto {
+   <<artefacto>>
+}
+class Especificacion["Especificación"]:::artefacto {
+   <<artefacto>>
+}
+class CriteriosAceptacion["Criterios de Aceptación"]:::artefacto {
+   <<artefacto>>
+}
+class Incremento["Incremento"]:::artefacto {
+   <<artefacto>>
+}
+class Vista41["Vista 4+1"]:::artefacto {
+   <<artefacto>>
+}
+class Test["Test"]:::artefacto {
+   <<artefacto>>
+}
+class TestAutomatizado["Test Automatizado"]:::artefacto {
+   <<artefacto>>
+}
+class WorkItemList["Work Item List"]:::artefacto {
+   <<artefacto>>
+}
+class SprintBacklog["Sprint Backlog"]:::artefacto {
+   <<artefacto>>
+}
+class DoD["Definition of Done (DoD)"]:::artefacto {
+   <<artefacto>>
+}
+class EspecificacionEjecutable["Especificacion Ejecutable"]:::artefacto {
+   <<artefacto>>
+}
+class ADR["Architecture Design Records (ADR)"]:::artefacto {
+   <<artefacto>>
+}
+class MemoriaPersistente["Memoria Persistente"]:::artefacto {
+   <<artefacto>>
+}
+class ListaRiesgos["Lista de Riesgos"]:::artefacto {
+   <<artefacto>>
+}
+class CodigoFuente["Código Fuente"]:::artefacto {
+   <<artefacto>>
+}
+class DisenioDetallado["Diseño Detallado"]:::artefacto {
+   <<artefacto>>
+}
+
+
+class Evento["Evento"]:::evento {
+   <<evento>>
+}
+class EventoPlanificado["Evento Planificado"]:::evento {
+   <<evento>>
+}
+class Sprint["Sprint"]:::evento {
+   <<evento>>
+}
+class SprintPlanning["Sprint Planning"]:::evento {
+   <<evento>>
+}
+
+
+MetamodeloProceso *-- Fase
+MetamodeloProceso *-- Rol
+MetamodeloProceso *-- Artefacto
+MetamodeloProceso *-- Evento
+Fase <|-- FaseInception
+Fase <|-- FaseElaboracion
+Fase <|-- FaseConstruccion
+Fase <|-- FaseTransicion
+Rol <|-- Analista
+Rol <|-- Arquitecto
+Rol <|-- Tester
+Rol <|-- EquipoDesarrollo
+EquipoDesarrollo <|-- Desarrollador
+EquipoDesarrollo <|-- CoordinadorIA
+CoordinadorIA *-- SubagenteDiseno : gestiona
+CoordinadorIA *-- SubagenteImplementacion : gestiona
+CoordinadorIA *-- SubagenteVerificacion : gestiona
+Artefacto <|-- DocumentoVision
+Artefacto <|-- Especificacion
+Especificacion *-- CasoUso
+Artefacto <|-- CodigoFuente
+Artefacto <|-- CriteriosAceptacion
+Artefacto <|-- Incremento
+Artefacto <|-- Vista41
+Artefacto <|-- Test
+Test <|-- TestAutomatizado
+Artefacto <|-- WorkItemList
+Artefacto <|-- SprintBacklog
+Artefacto <|-- DoD
+Artefacto <|-- EspecificacionEjecutable
+EspecificacionEjecutable o-- CriteriosAceptacion
+Artefacto <|-- ADR
+Artefacto <|-- MemoriaPersistente
+Artefacto <|-- ListaRiesgos
+Artefacto <|-- DisenioDetallado
+Evento <|-- EventoPlanificado
+EventoPlanificado <|-- Sprint
+Sprint *-- SprintPlanning
+Analista --> Especificacion : genera
+Arquitecto --> Vista41 : genera
+Arquitecto --> ADR : genera
+SubagenteDiseno --> DisenioDetallado : genera
+SubagenteImplementacion --> EspecificacionEjecutable : consume
+SubagenteImplementacion --> CodigoFuente : genera
+SubagenteVerificacion --> TestAutomatizado : genera
+Tester --> TestAutomatizado : valida
+EquipoDesarrollo --> Incremento : produce
+Desarrollador --> DisenioDetallado : revisa
+CriteriosAceptacion <-- Especificacion : derivados de
+TestAutomatizado --> CriteriosAceptacion : basado en
+MemoriaPersistente --> ADR : preserva
+MemoriaPersistente --> EspecificacionEjecutable : versiona
+SprintBacklog --> WorkItemList : derivado de
+SprintBacklog <-- Sprint : basado en
+Sprint --> Incremento : produce
+DoD --> Incremento : valida
+
+
+classDef proceso fill:#3d3d3a,stroke:#2C2C2A,color:#F1EFE8
+classDef fase fill:#c4a336,stroke:#8a6f1f,color:#1a1400
+classDef evento fill:#a45be9,stroke:#6a2fa8,color:#1a0033
+classDef rol fill:#534AB7,stroke:#2c2570,color:#eeeeff
+classDef artefacto fill:#36b3c4,stroke:#1d6e7a,color:#001a1e
