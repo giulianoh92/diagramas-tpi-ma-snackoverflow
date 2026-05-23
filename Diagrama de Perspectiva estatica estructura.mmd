@@ -13,51 +13,54 @@ class MetamodeloProceso["Meta-modelo del proceso de desarrollo global"]:::proces
 
 
 class Fase["Fase"]:::fase {
-   <<fase>>
+   <<fase (OpenUP)>>
 }
 class FaseInception["Inception"]:::fase {
-   <<fase>>
+   <<fase (OpenUP)>>
 }
 class FaseElaboracion["Elaboración"]:::fase {
-   <<fase>>
+   <<fase (OpenUP)>>
 }
 class FaseConstruccion["Construcción"]:::fase {
-   <<fase>>
+   <<fase (OpenUP)>>
 }
 class FaseTransicion["Transición"]:::fase {
-   <<fase>>
+   <<fase (OpenUP)>>
 }
 
 
 class Rol["Rol"]:::rol {
    <<rol>>
 }
+class AdministradorProyecto["Administrador de Proyecto"]:::rol{
+   <<rol (OpenUP)>>
+}
 class Analista["Analista"]:::rol {
-   <<rol>>
+   <<rol (OpenUP)>>
 }
 class Arquitecto["Arquitecto"]:::rol {
-   <<rol>>
+   <<rol (OpenUP)>>
 }
 class Tester["Tester"]:::rol {
-   <<rol>>
+   <<rol (OpenUP)>>
 }
 class EquipoDesarrollo["Equipo de Desarrollo"]:::rol {
    <<rol>>
 }
 class CoordinadorIA["Coordinador de IA"]:::rol {
-   <<rol>>
+   <<rol (SDD)>>
 }
 class SubagenteDiseno["Subagente de Diseño"]:::rol {
-   <<rol>>
+   <<rol (SDD)>>
 }
 class SubagenteImplementacion["Subagente de Implementación"]:::rol {
-   <<rol>>
+   <<rol (SDD)>>
 }
 class SubagenteVerificacion["Subagente de Verificación"]:::rol {
-   <<rol>>
+   <<rol (SDD)>>
 }
 class Desarrollador["Desarrollador"]:::rol {
-   <<rol>>
+   <<rol (OpenUP)>>
 }
 
 
@@ -65,55 +68,52 @@ class Artefacto["Artefacto"]:::artefacto {
    <<artefacto>>
 }
 class DocumentoVision["Documento de Visión"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (OpenUP)>>
 }
 class CasoUso["Caso de Uso"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (OpenUP)>>
 }
 class Especificacion["Especificación"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (OpenUP)>>
 }
 class CriteriosAceptacion["Criterios de Aceptación"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (SDD)>>
 }
 class Incremento["Incremento"]:::artefacto {
    <<artefacto>>
 }
 class Vista41["Vista 4+1"]:::artefacto {
-   <<artefacto>>
-}
-class Test["Test"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (OpenUP)>>
 }
 class TestAutomatizado["Test Automatizado"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (SDD)>>
 }
 class WorkItemList["Work Item List"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (OpenUP)>>
 }
 class SprintBacklog["Sprint Backlog"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (SCRUM)>>
 }
 class DoD["Definition of Done (DoD)"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (SCRUM)>>
 }
 class EspecificacionEjecutable["Especificacion Ejecutable"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (SDD)>>
 }
 class ADR["Architecture Design Records (ADR)"]:::artefacto {
    <<artefacto>>
 }
 class MemoriaPersistente["Memoria Persistente"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (SDD)>>
 }
 class ListaRiesgos["Lista de Riesgos"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (OpenUP)>>
 }
 class CodigoFuente["Código Fuente"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (SDD)>>
 }
 class DisenioDetallado["Diseño Detallado"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (OpenUP)>>
 }
 
 
@@ -124,10 +124,10 @@ class EventoPlanificado["Evento Planificado"]:::evento {
    <<evento>>
 }
 class Sprint["Sprint"]:::evento {
-   <<evento>>
+   <<evento (SCRUM)>>
 }
 class SprintPlanning["Sprint Planning"]:::evento {
-   <<evento>>
+   <<evento (SCRUM)>>
 }
 
 
@@ -139,6 +139,7 @@ Fase <|-- FaseInception
 Fase <|-- FaseElaboracion
 Fase <|-- FaseConstruccion
 Fase <|-- FaseTransicion
+Rol <|-- AdministradorProyecto
 Rol <|-- Analista
 Rol <|-- Arquitecto
 Rol <|-- Tester
@@ -155,8 +156,6 @@ Artefacto <|-- CodigoFuente
 Artefacto <|-- CriteriosAceptacion
 Artefacto <|-- Incremento
 Artefacto <|-- Vista41
-Artefacto <|-- Test
-Test <|-- TestAutomatizado
 Artefacto <|-- WorkItemList
 Artefacto <|-- SprintBacklog
 Artefacto <|-- DoD
@@ -169,9 +168,11 @@ Artefacto <|-- DisenioDetallado
 Evento <|-- EventoPlanificado
 EventoPlanificado <|-- Sprint
 Sprint *-- SprintPlanning
+Analista --> ListaRiesgos : genera
+Analista --> DocumentoVision : genera
 Analista --> Especificacion : genera
 Arquitecto --> Vista41 : genera
-Arquitecto --> ADR : genera
+Arquitecto --> ADR : registra
 SubagenteDiseno --> DisenioDetallado : genera
 SubagenteImplementacion --> EspecificacionEjecutable : consume
 SubagenteImplementacion --> CodigoFuente : genera
@@ -181,7 +182,7 @@ EquipoDesarrollo --> Incremento : produce
 Desarrollador --> DisenioDetallado : revisa
 CriteriosAceptacion <-- Especificacion : derivados de
 TestAutomatizado --> CriteriosAceptacion : basado en
-MemoriaPersistente --> ADR : preserva
+MemoriaPersistente *-- ADR
 MemoriaPersistente --> EspecificacionEjecutable : versiona
 SprintBacklog --> WorkItemList : derivado de
 SprintBacklog <-- Sprint : basado en
