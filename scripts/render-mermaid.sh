@@ -19,7 +19,8 @@ for src in **/*.mmd; do
     -i "/data/$src" \
     -o "/data/$out" \
     -b white \
-    --scale 2
+    --width 2400 \
+    --scale 4
 done
 
 if [[ "$found" -eq 0 ]]; then
