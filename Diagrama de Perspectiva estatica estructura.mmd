@@ -100,10 +100,13 @@ class Especificacion["Especificación"]:::artefacto {
    <<artefacto (OpenUP)>>
 }
 class CriteriosAceptacion["Criterios de Aceptación"]:::artefacto {
-   <<artefacto (OpenUP/SDD)>>
+   <<artefacto (SDD)>>
 }
 class Incremento["Incremento"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (General)>>
+}
+class MicroIncremento["Micro-incremento"]:::artefacto {
+   <<artefacto (OpenUP)>>
 }
 class Vista41["Vista 4+1"]:::artefacto {
    <<artefacto (OpenUP)>>
@@ -124,7 +127,7 @@ class EspecificacionEjecutable["Especificacion Ejecutable"]:::artefacto {
    <<artefacto (SDD)>>
 }
 class ADR["Architecture Design Records (ADR)"]:::artefacto {
-   <<artefacto (SDD)>>
+   <<artefacto (General)>>
 }
 class MemoriaPersistente["Memoria Persistente"]:::artefacto {
    <<artefacto (SDD)>>
@@ -133,10 +136,10 @@ class ListaRiesgos["Lista de Riesgos"]:::artefacto {
    <<artefacto (OpenUP)>>
 }
 class CodigoFuente["Código Fuente"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (General)>>
 }
 class DisenioDetallado["Diseño Detallado"]:::artefacto {
-   <<artefacto (OpenUP)>>
+   <<artefacto (OpenUP aplica SDD)>>
 }
 
 
@@ -189,6 +192,8 @@ Especificacion *-- CasoUso
 Artefacto <|-- CodigoFuente
 Artefacto <|-- CriteriosAceptacion
 Artefacto <|-- Incremento
+Artefacto <|-- MicroIncremento
+Incremento *-- MicroIncremento
 Artefacto <|-- Vista41
 Artefacto <|-- WorkItemList
 Artefacto <|-- SprintBacklog
@@ -219,6 +224,7 @@ DisciplinaDiseno ..> Arquitecto : involucra
 DisciplinaDiseno ..> SubagenteDiseno : involucra
 
 DisciplinaImplementacion ..> CodigoFuente : produce
+DisciplinaImplementacion ..> MicroIncremento : produce
 DisciplinaImplementacion ..> Incremento : produce
 DisciplinaImplementacion ..> Sprint : opera en
 DisciplinaImplementacion ..> SprintBacklog : usa
@@ -247,6 +253,7 @@ SubagenteImplementacion --> CodigoFuente : genera
 SubagenteVerificacion --> TestAutomatizado : genera
 Tester --> TestAutomatizado : valida
 EquipoDesarrollo --> Incremento : produce
+Desarrollador --> MicroIncremento : produce
 Desarrollador --> DisenioDetallado : revisa
 CriteriosAceptacion <-- Especificacion : derivados de
 TestAutomatizado --> CriteriosAceptacion : basado en
