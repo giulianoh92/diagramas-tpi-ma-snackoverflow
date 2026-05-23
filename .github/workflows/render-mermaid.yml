@@ -28,10 +28,22 @@ jobs:
           persist-credentials: true
           fetch-depth: 0
 
+      - name: Install oxipng
+        env:
+          OXIPNG_VERSION: 10.1.1
+        run: |
+          curl -fsSL "https://github.com/shssoichiro/oxipng/releases/download/v${OXIPNG_VERSION}/oxipng-${OXIPNG_VERSION}-x86_64-unknown-linux-musl.tar.gz" | tar -xz
+          sudo install -m 755 "oxipng-${OXIPNG_VERSION}-x86_64-unknown-linux-musl/oxipng" /usr/local/bin/oxipng
+          rm -rf "oxipng-${OXIPNG_VERSION}-x86_64-unknown-linux-musl"
+          oxipng --version
+
       - name: Render diagrams
+        id: render
+        continue-on-error: true
         run: bash scripts/render-diagrams.sh
 
       - name: Commit and push PNGs
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -43,3 +55,9 @@ jobs:
             git commit -m "chore: re-render diagrams"
             git push
           fi
+
+      - name: Fail if any diagram failed to render
+        if: steps.render.outcome == 'failure'
+        run: |
+          echo "::error::One or more diagrams failed to render. See 'Render diagrams' step for details."
+          exit 1
