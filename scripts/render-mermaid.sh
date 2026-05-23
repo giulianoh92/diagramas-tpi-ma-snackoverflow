@@ -2,11 +2,9 @@
 set -euo pipefail
 shopt -s nullglob globstar
 
-PUPPETEER_CFG="$(mktemp)"
-trap 'rm -f "$PUPPETEER_CFG"' EXIT
-cat > "$PUPPETEER_CFG" <<'JSON'
-{ "args": ["--no-sandbox"] }
-JSON
+IMAGE="${MERMAID_IMAGE:-minlag/mermaid-cli@sha256:1d7f446732299cd13fe574943b48be123f62626800dcfcc68ad0808dc13f183d}"
+
+docker pull -q "$IMAGE" >/dev/null
 
 found=0
 for src in **/*.mmd; do
@@ -14,12 +12,14 @@ for src in **/*.mmd; do
   found=1
   out="${src%.mmd}.png"
   echo "Rendering: $src -> $out"
-  npx --yes -p @mermaid-js/mermaid-cli@10 mmdc \
-    --input "$src" \
-    --output "$out" \
-    --backgroundColor white \
-    --scale 2 \
-    --puppeteerConfigFile "$PUPPETEER_CFG"
+  docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$PWD:/data" \
+    "$IMAGE" \
+    -i "/data/$src" \
+    -o "/data/$out" \
+    -b white \
+    --scale 2
 done
 
 if [[ "$found" -eq 0 ]]; then

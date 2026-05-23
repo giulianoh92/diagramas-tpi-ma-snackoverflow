@@ -27,18 +27,6 @@ jobs:
           persist-credentials: true
           fetch-depth: 0
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Chromium deps
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            libnss3 libatk-bridge2.0-0 libgtk-3-0 libxss1 libasound2t64 \
-            libgbm1 libxshmfence1 fonts-liberation libdrm2
-
       - name: Render diagrams
         run: bash scripts/render-mermaid.sh
 
