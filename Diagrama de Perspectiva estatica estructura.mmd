@@ -29,6 +29,26 @@ class FaseTransicion["Transición"]:::fase {
 }
 
 
+class Disciplina["Disciplina"]:::disciplina {
+   <<disciplina>>
+}
+class DisciplinaRequerimientos["Ingeniería de Requerimientos"]:::disciplina {
+   <<disciplina (OpenUP)>>
+}
+class DisciplinaDiseno["Diseño"]:::disciplina {
+   <<disciplina (OpenUP)>>
+}
+class DisciplinaImplementacion["Implementación"]:::disciplina {
+   <<disciplina (OpenUP)>>
+}
+class DisciplinaVerificacion["Verificación y Validación"]:::disciplina {
+   <<disciplina (OpenUP)>>
+}
+class DisciplinaEvolucion["Evolución"]:::disciplina {
+   <<disciplina (OpenUP)>>
+}
+
+
 class Rol["Rol"]:::rol {
    <<rol>>
 }
@@ -70,6 +90,9 @@ class Artefacto["Artefacto"]:::artefacto {
 class DocumentoVision["Documento de Visión"]:::artefacto {
    <<artefacto (OpenUP)>>
 }
+class Glosario["Glosario del Dominio"]:::artefacto {
+   <<artefacto (OpenUP)>>
+}
 class CasoUso["Caso de Uso"]:::artefacto {
    <<artefacto (OpenUP)>>
 }
@@ -77,7 +100,7 @@ class Especificacion["Especificación"]:::artefacto {
    <<artefacto (OpenUP)>>
 }
 class CriteriosAceptacion["Criterios de Aceptación"]:::artefacto {
-   <<artefacto (SDD)>>
+   <<artefacto (OpenUP/SDD)>>
 }
 class Incremento["Incremento"]:::artefacto {
    <<artefacto>>
@@ -101,7 +124,7 @@ class EspecificacionEjecutable["Especificacion Ejecutable"]:::artefacto {
    <<artefacto (SDD)>>
 }
 class ADR["Architecture Design Records (ADR)"]:::artefacto {
-   <<artefacto>>
+   <<artefacto (SDD)>>
 }
 class MemoriaPersistente["Memoria Persistente"]:::artefacto {
    <<artefacto (SDD)>>
@@ -110,7 +133,7 @@ class ListaRiesgos["Lista de Riesgos"]:::artefacto {
    <<artefacto (OpenUP)>>
 }
 class CodigoFuente["Código Fuente"]:::artefacto {
-   <<artefacto (SDD)>>
+   <<artefacto>>
 }
 class DisenioDetallado["Diseño Detallado"]:::artefacto {
    <<artefacto (OpenUP)>>
@@ -132,13 +155,22 @@ class SprintPlanning["Sprint Planning"]:::evento {
 
 
 MetamodeloProceso *-- Fase
+MetamodeloProceso *-- Disciplina
 MetamodeloProceso *-- Rol
 MetamodeloProceso *-- Artefacto
 MetamodeloProceso *-- Evento
+
 Fase <|-- FaseInception
 Fase <|-- FaseElaboracion
 Fase <|-- FaseConstruccion
 Fase <|-- FaseTransicion
+
+Disciplina <|-- DisciplinaRequerimientos
+Disciplina <|-- DisciplinaDiseno
+Disciplina <|-- DisciplinaImplementacion
+Disciplina <|-- DisciplinaVerificacion
+Disciplina <|-- DisciplinaEvolucion
+
 Rol <|-- AdministradorProyecto
 Rol <|-- Analista
 Rol <|-- Arquitecto
@@ -149,7 +181,9 @@ EquipoDesarrollo <|-- CoordinadorIA
 CoordinadorIA *-- SubagenteDiseno : gestiona
 CoordinadorIA *-- SubagenteImplementacion : gestiona
 CoordinadorIA *-- SubagenteVerificacion : gestiona
+
 Artefacto <|-- DocumentoVision
+Artefacto <|-- Glosario
 Artefacto <|-- Especificacion
 Especificacion *-- CasoUso
 Artefacto <|-- CodigoFuente
@@ -165,12 +199,46 @@ Artefacto <|-- ADR
 Artefacto <|-- MemoriaPersistente
 Artefacto <|-- ListaRiesgos
 Artefacto <|-- DisenioDetallado
+
 Evento <|-- EventoPlanificado
 EventoPlanificado <|-- Sprint
 Sprint *-- SprintPlanning
+
+DisciplinaRequerimientos ..> CasoUso : produce
+DisciplinaRequerimientos ..> DocumentoVision : produce
+DisciplinaRequerimientos ..> Glosario : mantiene
+DisciplinaRequerimientos ..> ListaRiesgos : mantiene
+DisciplinaRequerimientos ..> EspecificacionEjecutable : produce
+DisciplinaRequerimientos ..> WorkItemList : alimenta
+DisciplinaRequerimientos ..> Analista : involucra
+
+DisciplinaDiseno ..> Vista41 : produce
+DisciplinaDiseno ..> ADR : registra
+DisciplinaDiseno ..> DisenioDetallado : produce
+DisciplinaDiseno ..> Arquitecto : involucra
+DisciplinaDiseno ..> SubagenteDiseno : involucra
+
+DisciplinaImplementacion ..> CodigoFuente : produce
+DisciplinaImplementacion ..> Incremento : produce
+DisciplinaImplementacion ..> Sprint : opera en
+DisciplinaImplementacion ..> SprintBacklog : usa
+DisciplinaImplementacion ..> Desarrollador : involucra
+DisciplinaImplementacion ..> SubagenteImplementacion : involucra
+DisciplinaImplementacion ..> CoordinadorIA : involucra
+
+DisciplinaVerificacion ..> TestAutomatizado : produce
+DisciplinaVerificacion ..> CriteriosAceptacion : verifica contra
+DisciplinaVerificacion ..> DoD : aplica
+DisciplinaVerificacion ..> Tester : involucra
+DisciplinaVerificacion ..> SubagenteVerificacion : involucra
+
+DisciplinaEvolucion ..> EspecificacionEjecutable : versiona
+DisciplinaEvolucion ..> MemoriaPersistente : actualiza
+
 Analista --> ListaRiesgos : genera
 Analista --> DocumentoVision : genera
 Analista --> Especificacion : genera
+Analista --> Glosario : mantiene
 Arquitecto --> Vista41 : genera
 Arquitecto --> ADR : registra
 SubagenteDiseno --> DisenioDetallado : genera
@@ -184,14 +252,15 @@ CriteriosAceptacion <-- Especificacion : derivados de
 TestAutomatizado --> CriteriosAceptacion : basado en
 MemoriaPersistente *-- ADR
 MemoriaPersistente --> EspecificacionEjecutable : versiona
+Sprint *-- SprintBacklog
 SprintBacklog --> WorkItemList : derivado de
-SprintBacklog <-- Sprint : basado en
 Sprint --> Incremento : produce
 DoD --> Incremento : valida
 
 
 classDef proceso fill:#3d3d3a,stroke:#2C2C2A,color:#F1EFE8
 classDef fase fill:#c4a336,stroke:#8a6f1f,color:#1a1400
+classDef disciplina fill:#c47b36,stroke:#7a4a1d,color:#1a0f00
 classDef evento fill:#a45be9,stroke:#6a2fa8,color:#1a0033
 classDef rol fill:#534AB7,stroke:#2c2570,color:#eeeeff
 classDef artefacto fill:#36b3c4,stroke:#1d6e7a,color:#001a1e
