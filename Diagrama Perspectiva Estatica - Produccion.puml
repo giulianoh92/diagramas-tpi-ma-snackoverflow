@@ -1,0 +1,120 @@
+@startuml
+title Perspectiva Estática (Vista 2 de 2) - Producción de artefactos\nMeta-modelo del Proceso Híbrido (OpenUP / Scrum / SDD)
+
+skinparam linetype polyline
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam ranksep 50
+skinparam nodesep 22
+skinparam roundCorner 8
+hide empty members
+hide circle
+
+skinparam class {
+    BackgroundColor<<rol>> #534AB7
+    FontColor<<rol>> #eeeeff
+    BorderColor<<rol>> #2c2570
+
+    BackgroundColor<<artefacto>> #36b3c4
+    FontColor<<artefacto>> #001a1e
+    BorderColor<<artefacto>> #1d6e7a
+
+    BackgroundColor<<evento>> #a45be9
+    FontColor<<evento>> #1a0033
+    BorderColor<<evento>> #6a2fa8
+}
+
+package "Roles" {
+    class Analista <<rol>>
+    class Arquitecto <<rol>>
+    class Tester <<rol>>
+    class "Equipo de Desarrollo" as EquipoDesarrollo <<rol>>
+    class Desarrollador <<rol>>
+    class "Coordinador IA" as CoordinadorIA <<rol>>
+    class "Sub-agente Diseño" as SubDiseno <<rol>>
+    class "Sub-agente Implementación" as SubImpl <<rol>>
+    class "Sub-agente Verificación" as SubVerif <<rol>>
+}
+
+package "Artefactos" {
+    package "Requerimientos" {
+        class "Doc. Visión" as DocVision <<artefacto>>
+        class Glosario <<artefacto>>
+        class Especificacion <<artefacto>>
+        class "Lista Riesgos" as ListaRiesgos <<artefacto>>
+        class "Work Item List" as WorkItemList <<artefacto>>
+        class "Sprint Backlog" as SprintBacklog <<artefacto>>
+        class "Espec. Ejecutable" as EspecEjecutable <<artefacto>>
+    }
+
+    package "Diseño" {
+        class "Vista 4+1" as Vista41 <<artefacto>>
+        class ADR <<artefacto>>
+        class "Diseño Detallado" as DisenioDetallado <<artefacto>>
+    }
+
+    package "Implementación" {
+        class "Código Fuente" as CodigoFuente <<artefacto>>
+        class "Micro-incremento" as MicroIncremento <<artefacto>>
+        class Incremento <<artefacto>>
+    }
+
+    package "V&V" {
+        class "Crit. Aceptación" as CriteriosAceptacion <<artefacto>>
+        class "Test Automatizado" as TestAutomatizado <<artefacto>>
+        class "Definition of Done" as DoD <<artefacto>>
+    }
+
+    package "Evolución" {
+        class "Memoria Persistente" as MemoriaPersistente <<artefacto>>
+    }
+}
+
+package "Eventos" {
+    class Sprint <<evento>>
+}
+
+' ============================================================================
+' Rol -> Artefacto (produce / consume / valida / revisa / mantiene)
+' ============================================================================
+Analista          ..> ListaRiesgos       : genera
+Analista          ..> DocVision          : genera
+Analista          ..> Especificacion     : genera
+Analista          ..> Glosario           : mantiene
+Arquitecto        ..> Vista41            : genera
+Arquitecto        ..> ADR                : registra
+SubDiseno         ..> DisenioDetallado   : genera
+SubImpl           ..> EspecEjecutable    : consume
+SubImpl           ..> CodigoFuente       : genera
+SubVerif          ..> TestAutomatizado   : genera
+Tester            ..> TestAutomatizado   : valida
+EquipoDesarrollo  ..> Incremento         : produce
+Desarrollador     ..> MicroIncremento    : produce
+Desarrollador     ..> DisenioDetallado   : revisa
+CoordinadorIA     ..> EspecEjecutable    : orquesta pipeline sobre
+
+' ============================================================================
+' Artefacto / Evento -> Artefacto (deriva / basado en / valida)
+' ============================================================================
+Especificacion        ..> CriteriosAceptacion : deriva
+TestAutomatizado      ..> CriteriosAceptacion : basado en
+MemoriaPersistente    ..> EspecEjecutable     : versiona
+SprintBacklog         ..> WorkItemList        : derivado de
+Sprint                ..> Incremento          : produce
+DoD                   ..> Incremento          : valida
+
+legend right
+  | Color | Categoría |
+  |<#534AB7>| Rol |
+  |<#36b3c4>| Artefacto |
+  |<#a45be9>| Evento |
+  ----
+  Esta vista muestra **producción**:
+  qué rol genera, consume, valida o
+  mantiene cada artefacto.
+  La taxonomía (herencia, composición)
+  se ve en **Vista 1 - Taxonomía**.
+endlegend
+
+@enduml
