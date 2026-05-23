@@ -1,0 +1,14 @@
+@startuml
+title Prueba PlantUML CI
+
+actor Usuario
+participant "GitHub Actions" as CI
+participant "Docker plantuml" as PUML
+database Repo
+
+Usuario -> Repo : push .puml
+Repo -> CI : trigger workflow
+CI -> PUML : render diagram
+PUML -> Repo : commit .png
+Repo -> Usuario : tupla [.puml | .png]
+@enduml

@@ -1,11 +1,12 @@
-name: Render Mermaid Diagrams
+name: Render Diagrams
 
 on:
   push:
     branches: [main]
     paths:
       - '**/*.mmd'
-      - 'scripts/render-mermaid.sh'
+      - '**/*.puml'
+      - 'scripts/render-diagrams.sh'
       - '.github/workflows/render-mermaid.yml'
   workflow_dispatch:
 
@@ -13,7 +14,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: render-mermaid-${{ github.ref }}
+  group: render-diagrams-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -28,7 +29,7 @@ jobs:
           fetch-depth: 0
 
       - name: Render diagrams
-        run: bash scripts/render-mermaid.sh
+        run: bash scripts/render-diagrams.sh
 
       - name: Commit and push PNGs
         run: |
@@ -39,6 +40,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No diagram changes to commit"
           else
-            git commit -m "chore: re-render mermaid diagrams"
+            git commit -m "chore: re-render diagrams"
             git push
           fi
