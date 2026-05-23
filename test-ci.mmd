@@ -1,6 +1,8 @@
-flowchart LR
+flowchart TD
     A[Push .mmd] --> B{GitHub Actions}
     B --> C[Docker: mermaid-cli]
     C --> D[Render PNG]
-    D --> E[Commit back to repo]
-    E --> F((Tupla mmd + PNG))
+    D --> E[Replace previous PNG]
+    E --> F[Commit back to repo]
+    F --> G((Tupla mmd + PNG sincronizada))
+    G --> H[/Verificacion exitosa/]
