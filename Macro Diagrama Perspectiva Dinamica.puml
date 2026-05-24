@@ -1,5 +1,5 @@
 @startuml
-title Sprint (1 semana) - Iteración del proceso híbrido OpenUP / Scrum / SDD
+title  Iteración del proceso híbrido OpenUP / Scrum / SDD
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
@@ -46,68 +46,71 @@ skinparam note {
     FontColor       #3A2E0A
 }
 
-|Analista / Arquitecto|
-start
-:Revisar Work Item List;
-:Revisar Lista de Riesgos\nde la iteración;
-:Sprint Planning:\nSeleccionar work items del\nSprint Backlog;
-:Redactar Iteration Plan\ncon criterios de aceptación;
-:Redactar Especificación\nEjecutable;
-if (¿Requiere decisión\narquitectónica?) then (Sí)
-    :Registrar ADR\nen Memoria Persistente;
-else (No)
-endif
+!define ProMan Project\nManager
+!define ProManAna Project\nManager\n+ Analista
+!define Ana Analista
+!define AnaArq Analista\n+ Arquitecto
+!define Arq Arquitecto
+!define Dev Desarrollador
+!define Tes Tester
 
-|Desarrollador|
-:Revisar Spec Ejecutable\n[HITL];
-if (¿Spec válida?) then (No)
-    :Solicitar corrección;
-    |Analista / Arquitecto|
-    :Corregir Spec;
-    :Redactar Especificación\nEjecutable;
-    |Desarrollador|
-endif
+' SWIMLANES
+|ProMan|
+|ProManAna|
+|Ana|
+|AnaArq|
+|Arq|
+|Dev|
+|Tes|
 
-|Analista / Arquitecto|
-if (¿Spec aprobada?) then (No)
-    :Corregir Spec;
-else (Sí)
-endif
+' FASE CONCEPTION
+|Ana|
+repeat
+:<center>Generar Documento\nde Visión;
+:<center>Generar Glosario\nde Dominio;
+:<center>Identificar Casos\nde Uso principales;
+|AnaArq|
+:<center>Generar Lista\nde Riesgo inicial;
+|Dev|
+:<center>Configurar Memoria\nPersistente;
+|ProMan|
+repeat while (<center>¿El alcance\nes viable?) is (No) not (Sí)
 
-|Coordinador IA|
-:Ejecutar Pipeline SDD\n(Sub-agentes Diseño /\nImplementación);
+' FASE ELABORATION
+|Arq|
+repeat
+:<center>Definir\narquitectura base;
+:<center>Producir Vista\nLógica UML;
+:<center>Producir\nModelo 4+1;
+note right:<center> En módulos\ncríticos
+|Dev|
+:<center>Registrar ADRs principales\nen Memoria Persistente;
+:<center>Persistir convenciones de\ncódigo en Memoria Persistente;
+|ProManAna|
+:<center>Crear Work\nItem List inicial;
+repeat while (<center>¿La arquitectura base\nmitiga los riesgos críticos?) is (No) not (Sí)
 
-|Desarrollador|
-:Revisar artefactos\ngenerados por IA [HITL];
-if (¿Artefactos aprobados?) then (No)
-    |Coordinador IA|
-    :Re-ejecutar Pipeline SDD;
-    |Desarrollador|
-else (Sí)
-endif
-:Integrar micro-incremento\nal producto del sprint;
+' FASE CONSTRUCTION
+|AnaArq|
+repeat
+:<center>Seleccionar Work Items\npara la iteración;
+|Ana|
+:<center>Seleccionar y detallar Caso de Uso\ncorrespondiente al Work Item;
+|Dev|
+:<center>Ejecutar\npipeline SDD;
+note right:<center> Se profundiza en\nel diagrama SDD
+|ProMan|
+:<center>Actualizar Work\nItem List;
+|Ana|
+:<center>Actualizar Lista\nde Riesgos;
+|Dev|
+:<center>Registrar decisiones\nen Memoria Persistente;
+repeat while (<center>¿Work Item List vacía?) is (No) not (Sí)
 
-|Sub-agente Verificador|
-:Validar código vs Spec\n(verificación automática);
-
-|Tester|
-:Ejecutar pruebas\nde integración;
-:Validar intención del usuario\n(spec vs comportamiento);
-:Verificar Definition\nof Done por ítem;
-if (¿Todos los ítems\ncumplen DoD?) then (No)
-    :Marcar ítem como\nno terminado;
-    |Analista / Arquitecto|
-    :Revisar Work Item List;
-    |Tester|
-else (Sí)
-endif
-
-|Analista / Arquitecto|
-:Iteration Assessment\ncon el equipo;
-if (¿Incremento aceptado?) then (No)
-    :Revisar Work Item List;
-else (Sí)
-endif
-:Actualizar Memoria Persistente\n(decisiones, descubrimientos);
+' FASE TRANSITION
+|Tes|
+:<center>Validación final\ndel sistema completo;
+:<center>Generar reporte\nde validación;
+:<center>Verificar cobertura\nde specs;
 stop
 @enduml
