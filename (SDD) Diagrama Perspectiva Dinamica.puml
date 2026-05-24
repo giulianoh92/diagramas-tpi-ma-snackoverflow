@@ -46,71 +46,112 @@ skinparam note {
     FontColor       #3A2E0A
 }
 
-!define ProMan Project\nManager
-!define ProManAna Project\nManager\n+ Analista
-!define Ana Analista
-!define AnaArq Analista\n+ Arquitecto
-!define Arq Arquitecto
-!define Dev Desarrollador
+!define Dev Desarrollador  
+!define Coo Coordinador IA
+!define SubRed Subagente\nRedactor
+!define SubDis Subagente\nde Diseño
+!define SubImp Subagente\nde Implementación
+!define SubVer Subagente\nVerificador
 !define Tes Tester
 
-' SWIMLANES
-|ProMan|
-|ProManAna|
-|Ana|
-|AnaArq|
-|Arq|
 |Dev|
-|Tes|
+|Coo|
+|SubRed|
+|SubDis|
+|SubImp|
+|SubVer|
 
-' FASE CONCEPTION
-|Ana|
-repeat
-:<center>Generar Documento\nde Visión;
-:<center>Generar Glosario\nde Dominio;
-:<center>Identificar Casos\nde Uso principales;
-|AnaArq|
-:<center>Generar Lista\nde Riesgo inicial;
+' PIPELINE SDD
 |Dev|
-:<center>Configurar Memoria\nPersistente;
-|ProMan|
-repeat while (<center>¿El alcance\nes viable?) is (No) not (Sí)
+:Entregar\nCaso de Uso;
+|Coo|
+:Consultar Memoria Persistente;
+:Instanciar Subagente Redactor;
+|SubRed|
+:Genera Spec Ejecutable;
+|Dev|
+:Verifica Spec Ejecutable;
+if (¿La spec es técnicamente viable?) then (No)
+    repeat
+        |Dev|
+        :Comunicar observaciones;
+        |Coo|
+        :Reinstanciar Redactor con observaciones;
+        |SubRed|
+        :Genera Spec Ejecutable actualizada;
+        |Dev|
+    repeat while (¿La spec es técnicamente viable?) is (No) not (Sí)
+else (Sí)
+endif
 
-' FASE ELABORATION
-|Arq|
-repeat
-:<center>Definir\narquitectura base;
-:<center>Producir Vista\nLógica UML;
-:<center>Producir\nModelo 4+1;
-note right:<center> En módulos\ncríticos
+|Coo|
+:Instanciar Subagente de Diseño;
+|SubDis|
+:Genera Diseño Detallado;
 |Dev|
-:<center>Registrar ADRs principales\nen Memoria Persistente;
-:<center>Persistir convenciones de\ncódigo en Memoria Persistente;
-|ProManAna|
-:<center>Crear Work\nItem List inicial;
-repeat while (<center>¿La arquitectura base\nmitiga los riesgos críticos?) is (No) not (Sí)
+if (<center>¿Respeta los ADRs registrados\ny es consistente con\nla arquitectura base?) then (No)
+    repeat
+        |Dev|
+        :Comunicar observaciones;
+        |Coo|
+        :Reinstanciar Subagente de Diseño con observaciones;
+        |SubDis|
+        :Genera Diseño Detallado actualizado;
+        |Dev|
+    repeat while (<center>¿Respeta los ADRs registrados\ny es consistente con\nla arquitectura base?) is (No) not (Sí)
+else (Sí)
+endif
 
-' FASE CONSTRUCTION
-|AnaArq|
-repeat
-:<center>Seleccionar Work Items\npara la iteración;
-|Ana|
-:<center>Seleccionar y detallar Caso de Uso\ncorrespondiente al Work Item;
+|Coo|
+:Instanciar Subagente de Implementación;
+|SubImp|
+:Genera Código Fuente;
 |Dev|
-:<center>Ejecutar\npipeline SDD;
-note right:<center> Se profundiza en\nel diagrama SDD
-|ProMan|
-:<center>Actualizar Work\nItem List;
-|Ana|
-:<center>Actualizar Lista\nde Riesgos;
-|Dev|
-:<center>Registrar decisiones\nen Memoria Persistente;
-repeat while (<center>¿Work Item List vacía?) is (No) not (Sí)
+if (<center>¿Respeta las convenciones\nde código e implementa\ncorrectamente el diseño?) then (No)
+    repeat
+        |Dev|
+        :Comunicar observaciones;
+        |Coo|
+        :Reinstanciar Subagente de Implementación con observaciones;
+        |SubImp|
+        :Genera Código Fuente actualizado;
+        |Dev|
+    repeat while (<center>¿Respeta las convenciones\nde código e implementa\ncorrectamente el diseño?) is (No) not (Sí)
+else (Sí)
+endif
 
-' FASE TRANSITION
-|Tes|
-:<center>Validación final\ndel sistema completo;
-:<center>Generar reporte\nde validación;
-:<center>Verificar cobertura\nde specs;
+|Coo|
+:Instanciar Subagente Verificador;
+|SubVer|
+:Genera Tests Automatizados;
+:Ejecuta los tests contra el código;
+:Genera Reporte de Validación;
+|Dev|
+if (<center>¿Todos los criterios están cubiertos?) then (No)
+    repeat
+        |Dev|
+        :Comunicar observaciones;
+        |Coo|
+        :Reinstanciar Subagente Verificador con observaciones;
+        |SubVer|
+        :Ejecuta los tests actualizados contra el código;
+        :Genera Reporte de Validación actualizado;
+        |Dev|
+        repeat
+            |Dev|
+            :Comunicar observaciones;
+            |Coo|
+            :Reinstanciar Subagente de Implementación;
+            |SubImp|
+            :Gegenera Código Fuente actualizado;
+            |SubVer|
+            :Ejecuta los tests contra el código actualizado;
+            :Genera Reporte de Validación;
+            |Dev|
+        repeat while (<center>¿Los tests se ejecutaron\nexitosamente?) is (No) not (Sí)
+    repeat while (<center>¿Todos los criterios están cubiertos?) is (No) not (Sí)
+else (Sí)
+endif
+:ToDo: Definition of Done;
 stop
 @enduml
