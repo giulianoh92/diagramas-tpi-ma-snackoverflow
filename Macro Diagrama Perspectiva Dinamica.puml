@@ -98,15 +98,18 @@ repeat
     repeat
         |Ana|
         :<center>Seleccionar Work\nItem Pendiente;
-        :<center>Detallar Caso de Uso\ncorrespondiente al Work Item;
-        |Dev|
-        :<center>Ejecutar\npipeline SDD;
-        note left:<center>Se profundiza en\nel diagrama SDD
-        if (<center>¿Cumple todos los\nrequisitos del DoD?) then (No)
+        :<center>Se divide en XYZ;
+        repeat
+            :<center>Detallar Caso de Uso\ncorrespondiente al XYZ;
+            |Dev|
+            :<center>Ejecutar\npipeline SDD;
+            note left:<center>Se profundiza en\nel diagrama SDD
+        repeat while (<center>¿XYZ pendientes en Work Item?) is (Si) not (No)
+        if (<center>¿Work Item cumple todos los\nrequisitos del DoD?) then (No)
             repeat
             :<center>Cumplir con los\nrequisitos faltantes;
             note left:<center>Esto no deberia ocurrir, ya\nque el pipeline se asegura\nque se cumpla la DoD
-            repeat while (<center>¿Cumple todos los\nrequisitos del DoD?) is (No) not (Si)
+            repeat while (<center>¿Work Item cumple todos los\nrequisitos del DoD?) is (No) not (Si)
         else (Si)
         endif
         :<center>Integración del Work Item\nal producto del Sprint;

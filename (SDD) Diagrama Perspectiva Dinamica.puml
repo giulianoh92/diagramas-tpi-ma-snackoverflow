@@ -144,8 +144,6 @@ else (<center>Si)
 endif
 
 if (<center>¿Los tests se ejecutaron\ncorrectamente?) then (<center>Sí)
-    :<center>Terminar pipeline SDD;
-    stop
 else (<center>No)
     repeat
         |Dev|
@@ -155,8 +153,8 @@ else (<center>No)
         |SubImp|
         :<center>Genera Código\nFuente actualizado;
         |Dev|
-    repeat while (<center>¿Los tests se ejecutaron correctamente?) is (<center>No) not (<center>Sí)
-    :<center>Terminar pipeline SDD;
-    stop
+    repeat while (<center>¿Los tests se ejecutaron\ncorrectamente?) is (<center>No) not (<center>Sí)
 endif
+:<center>Integración continua\ndel producto del Work Item;
+stop
 @enduml
