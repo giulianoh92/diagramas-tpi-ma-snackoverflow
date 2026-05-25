@@ -1,4 +1,4 @@
-@startuml
+ @@startuml
 title  Iteración del proceso híbrido OpenUP / Scrum / SDD
 
 ' === Modern soft theme ===
@@ -82,7 +82,7 @@ repeat
 :<center>Definir\narquitectura base;
 :<center>Producir Vista\nLógica UML;
 :<center>Producir\nModelo 4+1;
-note right:<center> En módulos\ncríticos
+note right:<center>En módulos\ncríticos
 |Dev|
 :<center>Registrar ADRs principales\nen Memoria Persistente;
 :<center>Persistir convenciones de\ncódigo en Memoria Persistente;
@@ -93,12 +93,24 @@ repeat while (<center>¿La arquitectura base\nmitiga los riesgos críticos?) is 
 ' FASE CONSTRUCTION
 |AnaArq|
 repeat
-:<center>Seleccionar Work Items\npara la iteración;
-|Ana|
-:<center>Seleccionar y detallar Caso de Uso\ncorrespondiente al Work Item;
-|Dev|
-:<center>Ejecutar\npipeline SDD;
-note right:<center> Se profundiza en\nel diagrama SDD
+:<center>Comenzar\nnuevo Sprint;
+:<center>Asignar Work Items\na iteración;
+    repeat
+        |Ana|
+        :<center>Seleccionar Work\nItem Pendiente;
+        :<center>Detallar Caso de Uso\ncorrespondiente al Work Item;
+        |Dev|
+        :<center>Ejecutar\npipeline SDD;
+        note left:<center>Se profundiza en\nel diagrama SDD
+        if (<center>¿Cumple todos los\nrequisitos del DoD?) then (No)
+            repeat
+            :<center>Cumplir con los\nrequisitos faltantes;
+            note left:<center>Esto no deberia ocurrir, ya\nque el pipeline se asegura\nque se cumpla la DoD
+            repeat while (<center>¿Cumple todos los\nrequisitos del DoD?) is (No) not (Si)
+        else (Si)
+        endif
+        :<center>Integración del Work Item\nal producto del Sprint;
+    repeat while (<center>¿Work Items pendientes\nen Sprint?) is (Si) not (No)
 |ProMan|
 :<center>Actualizar Work\nItem List;
 |Ana|

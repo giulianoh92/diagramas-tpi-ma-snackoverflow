@@ -63,95 +63,100 @@ skinparam note {
 
 ' PIPELINE SDD
 |Dev|
-:Entregar\nCaso de Uso;
+:<center>Comenzar\npipeline SDD;
+:<center>Entregar\nCaso de Uso;
 |Coo|
-:Consultar Memoria Persistente;
-:Instanciar Subagente Redactor;
+:<center>Consultar Memoria\nPersistente;
+:<center>Instanciar Subagente\nRedactor;
 |SubRed|
-:Genera Spec Ejecutable;
+:<center>Genera Spec\nEjecutable;
 |Dev|
-:Verifica Spec Ejecutable;
-if (¿La spec es técnicamente viable?) then (No)
+:<center>Verifica Spec\nEjecutable;
+if (<center>¿La spec es\ntécnicamente viable?) then (<center>No)
     repeat
         |Dev|
-        :Comunicar observaciones;
+        :<center>Comunicar\nobservaciones;
         |Coo|
-        :Reinstanciar Redactor con observaciones;
+        :<center>Reinstanciar Redactor\ncon observaciones;
         |SubRed|
-        :Genera Spec Ejecutable actualizada;
+        :<center>Genera Spec\nEjecutable actualizada;
         |Dev|
-    repeat while (¿La spec es técnicamente viable?) is (No) not (Sí)
-else (Sí)
+    repeat while (<center>¿La spec es\ntécnicamente viable?) is (<center>No) not (<center>Sí)
+else (<center>Sí)
 endif
 
 |Coo|
-:Instanciar Subagente de Diseño;
+:<center>Instanciar Subagente\nde Diseño;
 |SubDis|
-:Genera Diseño Detallado;
+:<center>Genera Diseño\nDetallado;
 |Dev|
-if (<center>¿Respeta los ADRs registrados\ny es consistente con\nla arquitectura base?) then (No)
+if (<center>¿Respeta los ADRs registrados\ny es consistente con\nla arquitectura base?) then (<center>No)
     repeat
         |Dev|
-        :Comunicar observaciones;
+        :<center>Comunicar\nobservaciones;
         |Coo|
-        :Reinstanciar Subagente de Diseño con observaciones;
+        :<center>Reinstanciar Subagente de\nDiseño con observaciones;
         |SubDis|
-        :Genera Diseño Detallado actualizado;
+        :<center>Genera Diseño\nDetallado actualizado;
         |Dev|
-    repeat while (<center>¿Respeta los ADRs registrados\ny es consistente con\nla arquitectura base?) is (No) not (Sí)
-else (Sí)
+    repeat while (<center>¿Respeta los ADRs registrados\ny es consistente con\nla arquitectura base?) is (<center>No) not (<center>Sí)
+else (<center>Sí)
 endif
 
 |Coo|
-:Instanciar Subagente de Implementación;
+:<center>Instanciar Subagente\nde Implementación;
 |SubImp|
-:Genera Código Fuente;
+:<center>Genera Código\nFuente;
 |Dev|
-if (<center>¿Respeta las convenciones\nde código e implementa\ncorrectamente el diseño?) then (No)
+if (<center>¿Respeta las convenciones\nde código e implementa\ncorrectamente el diseño?) then (<center>No)
     repeat
         |Dev|
-        :Comunicar observaciones;
+        :<center>Comunicar\nobservaciones;
         |Coo|
-        :Reinstanciar Subagente de Implementación con observaciones;
+        :<center>Reinstanciar Subagente de\nImplementación con observaciones;
         |SubImp|
-        :Genera Código Fuente actualizado;
+        :<center>Genera Código\nFuente actualizado;
         |Dev|
-    repeat while (<center>¿Respeta las convenciones\nde código e implementa\ncorrectamente el diseño?) is (No) not (Sí)
-else (Sí)
+    repeat while (<center>¿Respeta las convenciones\nde código e implementa\ncorrectamente el diseño?) is (<center>No) not (<center>Sí)
+else (<center>Sí)
 endif
 
 |Coo|
-:Instanciar Subagente Verificador;
+:<center>Instanciar Subagente\nVerificador;
 |SubVer|
-:Genera Tests Automatizados;
-:Ejecuta los tests contra el código;
-:Genera Reporte de Validación;
+:<center>Genera Tests\nAutomatizados;
+:<center>Ejecuta los tests\ncontra el código;
+:<center>Genera Reporte\nde Validación;
 |Dev|
-if (<center>¿Todos los criterios están cubiertos?) then (No)
+if (<center>¿Todos los criterios están cubiertos?) then (<center>No)
+    repeat
+    |Dev|
+    :<center>Comunicar\nobservaciones;
+    |Coo|
+    :<center>Reinstanciar Subagente\nVerificador con observaciones;
+    |SubVer|
+    :<center>Genera tests\nactualizados;
+    :<center>Ejecuta los tests\ncontra el código;
+    :<center>Genera Reporte\nde Validación;
+    |Dev|
+    repeat while (<center>¿Todos los criterios\nestán cubiertos?) is (<center>No) not (<center>Si)
+else (<center>Si)
+endif
+
+if (<center>¿Los tests se ejecutaron\ncorrectamente?) then (<center>Sí)
+    :<center>Terminar pipeline SDD;
+    stop
+else (<center>No)
     repeat
         |Dev|
-        :Comunicar observaciones;
+        :<center>Comunicar\nobservaciones;
         |Coo|
-        :Reinstanciar Subagente Verificador con observaciones;
-        |SubVer|
-        :Ejecuta los tests actualizados contra el código;
-        :Genera Reporte de Validación actualizado;
+        :<center>Reinstanciar Subagente de\nImplementación con observaciones;
+        |SubImp|
+        :<center>Genera Código\nFuente actualizado;
         |Dev|
-        repeat
-            |Dev|
-            :Comunicar observaciones;
-            |Coo|
-            :Reinstanciar Subagente de Implementación;
-            |SubImp|
-            :Gegenera Código Fuente actualizado;
-            |SubVer|
-            :Ejecuta los tests contra el código actualizado;
-            :Genera Reporte de Validación;
-            |Dev|
-        repeat while (<center>¿Los tests se ejecutaron\nexitosamente?) is (No) not (Sí)
-    repeat while (<center>¿Todos los criterios están cubiertos?) is (No) not (Sí)
-else (Sí)
+    repeat while (<center>¿Los tests se ejecutaron correctamente?) is (<center>No) not (<center>Sí)
+    :<center>Terminar pipeline SDD;
+    stop
 endif
-:ToDo: Definition of Done;
-stop
 @enduml
