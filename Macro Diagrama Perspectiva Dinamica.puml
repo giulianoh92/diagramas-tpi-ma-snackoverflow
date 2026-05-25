@@ -46,13 +46,13 @@ skinparam note {
     FontColor       #3A2E0A
 }
 
-!define ProMan Project\nManager
-!define ProManAna Project\nManager\n+ Analista
-!define Ana Analista
-!define AnaArq Analista\n+ Arquitecto
-!define Arq Arquitecto
-!define Dev Desarrollador
-!define Tes Tester
+!define ProMan <center>Project\nManager
+!define ProManAna <center>Project\nManager\n+ Analista
+!define Ana <center>Analista
+!define AnaArq <center>Analista\n+ Arquitecto
+!define Arq <center>Arquitecto
+!define Dev <center>Desarrollador
+!define Tes <center>Tester
 
 ' SWIMLANES
 |ProMan|

@@ -46,13 +46,13 @@ skinparam note {
     FontColor       #3A2E0A
 }
 
-!define Dev Desarrollador  
-!define Coo Coordinador IA
-!define SubRed Subagente\nRedactor
-!define SubDis Subagente\nde Diseño
-!define SubImp Subagente\nde Implementación
-!define SubVer Subagente\nVerificador
-!define Tes Tester
+!define Dev <center>Desarrollador  
+!define Coo <center>Coordinador IA
+!define SubRed <center>Subagente\nRedactor
+!define SubDis <center>Subagente\nde Diseño
+!define SubImp <center>Subagente\nde Implementación
+!define SubVer <center>Subagente\nVerificador
+!define Tes <center>Tester
 
 |Dev|
 |Coo|
@@ -128,7 +128,7 @@ endif
 :<center>Ejecuta los tests\ncontra el código;
 :<center>Genera Reporte\nde Validación;
 |Dev|
-if (<center>¿Todos los criterios están cubiertos?) then (<center>No)
+if (<center>¿Todos los criterios\nestán cubiertos?) then (<center>No)
     repeat
     |Dev|
     :<center>Comunicar\nobservaciones;
