@@ -16,11 +16,22 @@ fi
 
 rendered=()
 failed=()
+skipped=()
 found=0
+
+is_empty_source() {
+  [[ ! -s "$1" ]] && return 0
+  ! grep -q '[^[:space:]]' "$1"
+}
 
 render_mermaid() {
   local src="$1"
   local out="${src%.mmd}.png"
+  if is_empty_source "$src"; then
+    echo "→ skip (empty): $src"
+    skipped+=("$src")
+    return 0
+  fi
   echo "→ mermaid: $src"
   if docker run --rm \
       -u "$(id -u):$(id -g)" \
@@ -41,6 +52,11 @@ render_mermaid() {
 render_plantuml() {
   local src="$1"
   local out="${src%.puml}.png"
+  if is_empty_source "$src"; then
+    echo "→ skip (empty): $src"
+    skipped+=("$src")
+    return 0
+  fi
   echo "→ plantuml: $src"
   if docker run --rm \
       -u "$(id -u):$(id -g)" \
@@ -88,7 +104,11 @@ fi
 echo ""
 echo "=== Summary ==="
 echo "Rendered: ${#rendered[@]}"
+echo "Skipped:  ${#skipped[@]}"
 echo "Failed:   ${#failed[@]}"
+if [[ "${#skipped[@]}" -gt 0 ]]; then
+  printf '  ~ %s\n' "${skipped[@]}"
+fi
 if [[ "${#failed[@]}" -gt 0 ]]; then
   printf '  - %s\n' "${failed[@]}" >&2
   exit 1
