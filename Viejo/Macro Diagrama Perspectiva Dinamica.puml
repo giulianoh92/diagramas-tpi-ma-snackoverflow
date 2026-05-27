@@ -66,12 +66,13 @@ skinparam note {
 ' FASE CONCEPTION
 '|Ana|
 start
-package Iniciar proyecto {
-    :<center>Generar Documento\nde Visión;
-    :<center>Generar Glosario\nde Dominio;
-    '|AnaArq|
-    :<center>Generar Lista\nde Riesgo inicial;
-}
+fork
+:<center>Generar Documento\nde Visión;
+fork again
+:<center>Generar Glosario\nde Dominio;
+fork again
+:<center>Generar Lista\nde Riesgo inicial;
+end fork
 
 fork
     :<center>Identificar y\nRefinar Requisitos;
@@ -82,12 +83,11 @@ fork
     ':<center>Identificar Casos\nde Uso principales;
     '}
 fork again
-    package Configurar Entorno de IA {
-    :<center>Configurar Memoria\nPersistente;
-    }
+    :<center>Configurar y Refinar\nMemoria Persistente;
+fork again
+    :<center>Crear Work\nItem List inicial;
 endfork
 stop
-
 
 ' FASE ELABORATION
 '|Arq|
@@ -110,12 +110,9 @@ fork again
 
 '|Dev|
 fork again
-package Configurar Entorno de IA {
-    :<center>Registrar ADRs principales\nen Memoria Persistente;
-    :<center>Persistir convenciones de\ncódigo en Memoria Persistente;
-    '|ProManAna|
-    :<center>Crear Work\nItem List inicial;
-}
+    :<center>Configurar y Refinar\nMemoria Persistente;
+fork again
+    :<center>Desarrollar documentación\ndel proyecto;
 endfork
 stop
 
@@ -164,6 +161,8 @@ fork again
             '}
         repeat while (<center>¿Work Item List vacía?) is (No) not (Sí)
     }
+fork again
+    :<center>Configurar y Refinar\nMemoria Persistente;
 fork again
     :<center>Desarrollar documentación\ndel proyecto;
 endfork
