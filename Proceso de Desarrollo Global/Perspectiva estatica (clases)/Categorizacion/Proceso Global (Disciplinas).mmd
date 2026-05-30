@@ -1,0 +1,34 @@
+---
+config:
+    layout: elk
+    class:
+        hideEmptyMembersBox: true
+---
+classDiagram
+
+class Disciplina["Disciplina"]:::disciplina {
+    <<Disciplina>>
+}
+class DRequerimientos["Ing. de Requisitos"]:::disciplina {
+    <<Disciplina>>
+}
+class DDiseno["Diseño"]:::disciplina {
+    <<Disciplina>>
+}
+class DImplementacion["Implementación"]:::disciplina {
+    <<Disciplina>>
+}
+class DVerificacion["Verificación y Validación"]:::disciplina {
+    <<Disciplina>>
+}
+class DEvolucion["Evolución"]:::disciplina {
+    <<Disciplina>>
+}
+
+Disciplina <|-- DRequerimientos
+Disciplina <|-- DDiseno
+Disciplina <|-- DImplementacion
+Disciplina <|-- DVerificacion
+Disciplina <|-- DEvolucion
+
+classDef disciplina fill:#c47b36,stroke:#7a4a1d,color:#1a0f00

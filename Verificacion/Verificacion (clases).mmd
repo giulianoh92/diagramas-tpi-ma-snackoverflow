@@ -7,47 +7,56 @@ config:
 title: Meta-modelo de Verificacion
 ---
 classDiagram
-class Analista["Analista"]:::rol {
+class CoordinadorIA["Coordinador de IA"]:::rol {
     <<Rol>>
 }
 
-class AdministradorProyecto["Administrador de Proyecto"]:::rol {
+class SubVer["Subagente Verificador"]:::rol {
     <<Rol>>
 }
 
-class DocumentoDeVision["Documento de Visión"]:::artefacto {
+class Tester["Tester"]:::rol {
+    <<Rol>>
+}
+
+class Desarrollador["Desarrollador"]:::rol {
+    <<Rol>>
+}
+
+class TestUnitario["Test Unitario"]:::artefacto {
     <<Artefacto>>
 }
 
-class GlosarioDominio["Glosario de Dominio"]:::artefacto {
+class MicroIncremento["Micro-incremento"]:::artefacto {
     <<Artefacto>>
 }
 
-class CasoDeUso["Caso de Uso"]:::artefacto {
+class TestIntegracion["Test de Integración"]:::artefacto {
     <<Artefacto>>
 }
 
-class ListaDeRiesgos["Lista de Riesgos"]:::artefacto {
+class WorkItem["Work Item"]:::artefacto {
     <<Artefacto>>
 }
 
-class WorkItemList["Work Item List"]:::artefacto {
+class TestSistema["Test de Sistema"]:::artefacto {
     <<Artefacto>>
 }
 
-class MemoriaPersistente["Memoria Persistente"]:::artefacto {
+class ProductoSoftware["Producto de Software"]:::artefacto {
     <<Artefacto>>
 }
 
-Analista --> DocumentoDeVision       : elabora
-Analista --> GlosarioDominio         : mantiene
-Analista --> CasoDeUso               : elabora y detalla
-Analista --> ListaDeRiesgos          : actualiza
+%% === RELACIONES ===
+Tester --> TestIntegracion : Genera y Realiza
+Tester --> TestSistema : Genera y Realiza
+SubVer --> TestUnitario : Genera y Realiza
+Desarrollador --> TestUnitario : Valida
 
-AdministradorProyecto --> WorkItemList      : prioriza y actualiza
-
-CasoDeUso --> WorkItemList           : origina items en
-CasoDeUso --> MemoriaPersistente     : se persiste en
+CoordinadorIA *-- SubVer : Coordina
+TestUnitario --> MicroIncremento : Verifica
+TestIntegracion --> WorkItem : Verifica
+TestSistema --> ProductoSoftware         : Verifica
 
 classDef proceso fill:#3d3d3a,stroke:#2C2C2A,color:#F1EFE8
 classDef fase fill:#c4a336,stroke:#8a6f1f,color:#1a1400
