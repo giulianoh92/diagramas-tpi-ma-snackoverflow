@@ -1,5 +1,5 @@
 @startuml FaseConstruccion
-title  Meta-Modelo Del Proceso De Desarrollo Global (Fase de Construcción)
+title  Meta-Modelo del Ciclo de Vida de Desarrollo
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
