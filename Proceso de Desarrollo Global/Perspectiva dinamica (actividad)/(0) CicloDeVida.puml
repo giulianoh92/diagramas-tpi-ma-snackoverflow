@@ -1,5 +1,5 @@
-@startuml FaseTransicion
-title  Meta-Modelo Del Proceso De Desarrollo Global (Fase de Transición)
+@startuml FaseConstruccion
+title  Meta-Modelo Del Proceso De Desarrollo Global (<center>Fase de Construcción)
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
@@ -46,17 +46,26 @@ skinparam note {
     FontColor       #3A2E0A
 }
 
-' FASE TRANSITION
 start
-:Planeamiento de Iteración;
-fork
-    :<center>Realizar proceso\nde verificación;
-    note right:<center>Se desarrolla en\nel Meta-Modelo del\nProceso de Verificación
-fork again
-    :<center>Finalizar documentación\ndel proyecto;
-fork again
-    :<center>Prepararse para\nel despliegue;
-endfork
-:<center>Desplegar\nversión;
+repeat
+    :Fase de Inicio;
+    note left :<center>Se desarrolla en\nel Meta-Modelo de\nFase de Inicio
+repeat while (<center>¿Se cumplieron los\nhitos de la fase?) is (<center>No) not (<center>Si)
+
+repeat
+    :Fase de Elaboración;
+    note left :<center>Se desarrolla en\nel Meta-Modelo de\nFase de Elaboración
+repeat while (<center>¿Se cumplieron los\nhitos de la fase?) is (<center>No) not (<center>Si)
+
+repeat
+    :Fase de Construcción;
+    note left :<center>Se desarrolla en\nel Meta-Modelo de\nFase de Construcción
+repeat while (<center>¿Se cumplieron los\nhitos de la fase?) is (<center>No) not (<center>Si)
+
+repeat
+    :Fase de Transición;
+    note left :<center>Se desarrolla en\nel Meta-Modelo de\nFase de Transición
+    repeat while (<center>¿Se cumplieron los\nhitos de la fase?) is (<center>No) not (<center>Si)
 stop
+
 @enduml

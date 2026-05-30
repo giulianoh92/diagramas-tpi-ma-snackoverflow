@@ -48,18 +48,17 @@ skinparam note {
 
 ' FASE CONSTRUCTION
 start
+:Planeamiento de Iteración;
 fork
     :<center>Identificar y\nRefinar Requisitos;
     note right:<center>Se desarrolla en\nel Meta-Modelo del Proceso\nde Ingeniería de Requisitos
 fork again
-    package Proceso de Desarrollo {
-        repeat
-            :<center>Comenzar\nnuevo Sprint;
-            :<center>Asignar Work Items\na iteración;
-            :<center>Desarrollar Sprint;
-            note right:<center>Se desarrolla en\nel Meta-Modelo del\nProceso de Diseño
-        repeat while (<center>¿Work Item List vacía?) is (No) not (Sí)
-    }
+package Proceso de Desarrollo {
+    :<center>Comenzar\nnuevo Sprint;
+    :<center>Asignar Work Items\na iteración;
+    :<center>Desarrollar Sprint;
+    note right:<center>Se desarrolla en\nel Meta-Modelo del\nProceso de Diseño
+}
 fork again
     :<center>Configurar y Refinar\nMemoria Persistente;
 fork again
