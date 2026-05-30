@@ -1,5 +1,5 @@
 @startuml
-title Ingeniería de Requisitos
+title Ingeniería de Requerimientos
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
