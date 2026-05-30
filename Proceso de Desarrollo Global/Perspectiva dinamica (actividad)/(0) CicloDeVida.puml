@@ -1,5 +1,5 @@
 @startuml FaseConstruccion
-title  Meta-Modelo Del Proceso De Desarrollo Global (<center>Fase de Construcción)
+title  Meta-Modelo Del Proceso De Desarrollo Global (Fase de Construcción)
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
@@ -8,7 +8,7 @@ skinparam defaultFontSize 11
 skinparam titleFontSize 16
 skinparam titleFontStyle bold
 skinparam shadowing false
-skinparam roundCorner 14
+skinparam roundCorner 14d
 skinparam linetype polyline
 
 skinparam activity {
