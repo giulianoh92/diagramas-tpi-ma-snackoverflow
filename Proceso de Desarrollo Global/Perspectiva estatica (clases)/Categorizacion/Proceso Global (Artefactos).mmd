@@ -5,7 +5,6 @@ config:
         hideEmptyMembersBox: true
 ---
 classDiagram
-
 class Artefacto["Artefacto"]:::artefacto {
     <<Artefacto>>
 }
@@ -31,9 +30,6 @@ class SprintBacklog["Sprint Backlog"]:::artefacto {
     <<Artefacto>>
 }
 class EspecEjecutable["Espec. Ejecutable"]:::artefacto {
-    <<Artefacto>>
-}
-class Vista41["Vista 4+1"]:::artefacto {
     <<Artefacto>>
 }
 class ADR["ADR"]:::artefacto {
@@ -63,6 +59,33 @@ class DoD["Definition of Done"]:::artefacto {
 class MemoriaPersistente["Memoria Persistente"]:::artefacto {
     <<Artefacto>>
 }
+class ModeloBBDD["Modelo de Base de Datos"]:::artefacto {
+    <<Artefacto>>
+}
+class Interfaz["Interfaz"]:::artefacto {
+    <<Artefacto>>
+}
+class ArquitecturaSoftware["Arquitectura de Software"]:::artefacto {
+    <<Artefacto>>
+}
+class PatronDisenio["Patrón de Diseño"]:::artefacto {
+    <<Artefacto>>
+}
+class Test["Test"]:::artefacto {
+    <<Artefacto>>
+}
+class TestUnitario["Test Unitario"]:::artefacto {
+    <<Artefacto>>
+}
+class TestIntegracion["Test de Integración"]:::artefacto {
+    <<Artefacto>>
+}
+class TestSistema["Test de Sistema"]:::artefacto {
+    <<Artefacto>>
+}
+class ProductoSoftware["Producto de Software"]:::artefacto {
+    <<Artefacto>>
+}
 
 Artefacto <|-- DocVision
 Artefacto <|-- Glosario
@@ -72,17 +95,24 @@ Artefacto <|-- ListaRiesgos
 Artefacto <|-- WorkItemList
 Artefacto <|-- SprintBacklog
 Artefacto <|-- EspecEjecutable
-Artefacto <|-- Vista41
 Artefacto <|-- ADR
 Artefacto <|-- DisenioDetallado
 Artefacto <|-- CodigoFuente
 Artefacto <|-- MicroIncremento
 Artefacto <|-- Incremento
 Artefacto <|-- CriteriosAceptacion
-Artefacto <|-- TestAutomatizado
+Artefacto <|-- Test
 Artefacto <|-- DoD
 Artefacto <|-- MemoriaPersistente
-
+Artefacto <|-- ModeloBBDD
+Artefacto <|-- Interfaz
+Artefacto <|-- ArquitecturaSoftware
+Artefacto <|-- PatronDisenio
+Artefacto <|-- ProductoSoftware
+Test <|-- TestAutomatizado
+TestAutomatizado <|-- TestUnitario
+Test <|-- TestIntegracion
+Test <|-- TestSistema
 Especificacion *-- CasoUso
 EspecEjecutable o-- CriteriosAceptacion
 MemoriaPersistente *-- ADR

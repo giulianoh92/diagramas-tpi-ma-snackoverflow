@@ -47,16 +47,27 @@ class ProductoSoftware["Producto de Software"]:::artefacto {
     <<Artefacto>>
 }
 
+class TestAutomatizado["Test Automatizado"]:::artefacto {
+    <<Artefacto>>
+}
+
+class TestManual["Test Manual"]:::artefacto {
+    <<Artefacto>>
+}
+
+TestAutomatizado *-- TestUnitario
+TestManual *-- TestIntegracion
+TestManual *-- TestSistema
+
 %% === RELACIONES ===
-Tester --> TestIntegracion : Genera y Realiza
-Tester --> TestSistema : Genera y Realiza
-SubVer --> TestUnitario : Genera y Realiza
-Desarrollador --> TestUnitario : Valida
+Tester --> TestManual : Genera y Realiza
+SubVer --> TestAutomatizado : Genera y Realiza
+Desarrollador --> TestAutomatizado : Valida
 
 CoordinadorIA *-- SubVer : Coordina
 TestUnitario --> MicroIncremento : Verifica
 TestIntegracion --> WorkItem : Verifica
-TestSistema --> ProductoSoftware         : Verifica
+TestSistema --> ProductoSoftware : Verifica
 
 classDef proceso fill:#3d3d3a,stroke:#2C2C2A,color:#F1EFE8
 classDef fase fill:#c4a336,stroke:#8a6f1f,color:#1a1400
