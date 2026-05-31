@@ -1,4 +1,5 @@
 @startuml
+skinparam dpi 200
 title  Iteración del proceso híbrido OpenUP / Scrum / SDD
 
 ' === Modern soft theme ===

@@ -1,4 +1,5 @@
 @startuml FaseConstruccion
+skinparam dpi 200
 title  Meta-Modelo Del Proceso De Desarrollo Global (Fase de Construcción)
 
 ' === Modern soft theme ===
