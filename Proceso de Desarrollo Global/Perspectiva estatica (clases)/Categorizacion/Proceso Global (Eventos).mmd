@@ -1,0 +1,31 @@
+---
+config:
+    layout: elk
+    class:
+        hideEmptyMembersBox: true
+---
+classDiagram
+
+class Evento["Evento"]:::evento {
+    <<Evento>>
+}
+class EventoPlanificado["Evento Planificado"]:::evento {
+    <<Evento>>
+}
+class Sprint["Sprint"]:::evento {
+    <<Evento>>
+}
+class SprintPlanning["Sprint Planning"]:::evento {
+    <<Evento>>
+}
+class SprintBacklog["Sprint Backlog"]:::artefacto {
+    <<Artefacto>>
+}
+
+Evento <|-- EventoPlanificado
+EventoPlanificado <|-- Sprint
+Sprint *-- SprintPlanning
+Sprint *-- SprintBacklog
+
+classDef evento    fill:#a45be9,stroke:#6a2fa8,color:#1a0033
+classDef artefacto fill:#36b3c4,stroke:#1d6e7a,color:#001a1e

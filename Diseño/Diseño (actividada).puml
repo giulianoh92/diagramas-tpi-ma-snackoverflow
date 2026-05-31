@@ -1,5 +1,5 @@
 @startuml
-title Ingeniería de Requerimientos
+title Diseño
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
@@ -50,12 +50,13 @@ skinparam note {
 
 start
 fork
-:<center>Generar Documento\nde Visión;
+    :<center>Evaluar arquitecturas\nde software;
 fork again
-:<center>Generar Glosario\nde Dominio;
+    :<center>Evaluar patrones\nde diseño;
 fork again
-:<center>Definir Casos de\nUso Principales;
+    :<center>Diseñar y refinar\ninterfaces;
+fork again
+    :<center>Diseñar y refinar\nbase de datos;
 end fork
-:<center>Elaborar especificaciones\nde Casos de Uso;
 stop
 @enduml

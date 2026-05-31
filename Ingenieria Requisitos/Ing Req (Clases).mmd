@@ -1,11 +1,11 @@
 ---
-title: Meta-modelo Ingeniería de Requerimientos
 config:
-    layout: elk
-    class:
-        hideEmptyMembersBox: true
+  layout: elk
+  class:
+    hideEmptyMembersBox: true
+  theme: neutral
+title: Meta-modelo Ingeniería de Requerimientos
 ---
-
 classDiagram
 class Analista["Analista"]:::rol {
     <<Rol>>
@@ -38,8 +38,6 @@ class WorkItemList["Work Item List"]:::artefacto {
 class MemoriaPersistente["Memoria Persistente"]:::artefacto {
     <<Artefacto>>
 }
-
-%% === RELACIONES ===
 
 Analista --> DocumentoDeVision       : elabora
 Analista --> GlosarioDominio         : mantiene

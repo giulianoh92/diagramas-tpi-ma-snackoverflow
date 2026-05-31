@@ -1,0 +1,30 @@
+---
+config:
+    layout: elk
+    class:
+        hideEmptyMembersBox: true
+---
+classDiagram
+
+class Fase["Fase"]:::fase {
+    <<Fase>>
+}
+class FaseInception["Inception"]:::fase {
+    <<Fase>>
+}
+class FaseElaboracion["Elaboración"]:::fase {
+    <<Fase>>
+}
+class FaseConstruccion["Construcción"]:::fase {
+    <<Fase>>
+}
+class FaseTransicion["Transición"]:::fase {
+    <<Fase>>
+}
+
+Fase <|-- FaseInception
+Fase <|-- FaseElaboracion
+Fase <|-- FaseConstruccion
+Fase <|-- FaseTransicion
+
+classDef fase fill:#c4a336,stroke:#8a6f1f,color:#1a1400
