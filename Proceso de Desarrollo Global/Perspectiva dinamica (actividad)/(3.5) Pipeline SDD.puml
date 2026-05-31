@@ -1,6 +1,6 @@
 @startuml
 skinparam dpi 200
-title  Iteración del proceso híbrido OpenUP / Scrum / SDD
+title  Meta-Modelo del Pipeline SSD asistido por AI
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
