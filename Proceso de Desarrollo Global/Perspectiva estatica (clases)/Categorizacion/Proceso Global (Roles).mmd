@@ -31,6 +31,9 @@ class Desarrollador["Desarrollador"]:::rol {
 class CoordinadorIA["Coordinador IA"]:::rol {
     <<Rol>>
 }
+class SubRedactor["Sub-agente Redactor"]:::rol {
+    <<Rol>>
+}
 class SubDiseno["Sub-agente Diseño"]:::rol {
     <<Rol>>
 }
@@ -48,6 +51,7 @@ Rol <|-- Tester
 Rol <|-- EquipoDesarrollo
 EquipoDesarrollo <|-- Desarrollador
 EquipoDesarrollo <|-- CoordinadorIA
+CoordinadorIA *-- SubRedactor
 CoordinadorIA *-- SubDiseno
 CoordinadorIA *-- SubImpl
 CoordinadorIA *-- SubVerif
