@@ -13,17 +13,17 @@ skinparam roundCorner 14
 skinparam linetype polyline
 
 skinparam activity {
-    BackgroundColor       #B0DFE8
-    BorderColor           #7DB9C5
-    FontColor             #0F3539
+    BackgroundColor       #C9DFEE
+    BorderColor           #000000
+    FontColor             #000000
     FontName              Helvetica
     FontSize              11
-    DiamondBackgroundColor #F4E2A0
-    DiamondBorderColor    #C9B05E
-    DiamondFontColor      #3A2E0A
-    StartColor            #6B7280
-    EndColor              #6B7280
-    BarColor              #6B7280
+    DiamondBackgroundColor #D9C2E3
+    DiamondBorderColor    #000000
+    DiamondFontColor      #000000
+    StartColor            #000000
+    EndColor              #000000
+    BarColor              #000000
 }
 
 skinparam partition {
@@ -35,8 +35,8 @@ skinparam partition {
 }
 
 skinparam arrow {
-    Color     #6B7280
-    FontColor #4A4A48
+    Color     #090D10
+    FontColor #090D10
     FontSize  10
     Thickness 1
 }
@@ -46,7 +46,6 @@ skinparam note {
     BorderColor     #C9B05E
     FontColor       #3A2E0A
 }
-
 ' FASE CONSTRUCTION
 start
 :Planeamiento de Iteración;
