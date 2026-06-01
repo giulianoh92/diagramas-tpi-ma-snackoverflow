@@ -1,6 +1,6 @@
 @startuml
 skinparam dpi 200
-title  Pipeline SDD
+title <center>3.5.1. Pipeline SDD
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
@@ -47,185 +47,17 @@ skinparam note {
     FontColor       #3A2E0A
 }
 
-!define Dev <center>Desarrollador  
-!define Coo <center>Coordinador IA
-!define SubRed <center>Subagente\nRedactor
-!define SubDis <center>Subagente\nde Diseño
-!define SubImp <center>Subagente\nde Implementación
-!define SubVer <center>Subagente\nVerificador
-!define Tes <center>Tester
-!define CooSub <center>Coordinador IA\n+ Subagentes
-
-
-|CooSub|
-|Dev|
-'|Coo|
-'|SubRed|
-'|SubDis|
-'|SubImp|
-'|SubVer|
-
-' PIPELINE SDD
-|Dev|
 start
 :<center>Comenzar\npipeline SDD;
 :<center>Instanciar Coordinador\nde IA con Caso de Uso;
-
-repeat
-    |CooSub|
-    :<center>Generar Spec\nEjecutable;
-    |Dev|
-    backward :<center>Comunicar observaciones\na Coordinador de IA;
-repeat while (<center>¿La spec es\ntécnicamente viable?) is (<center>No) not (<center>Sí)
-
-
-'|Coo|
-':<center>Consultar Memoria\nPersistente;
-':<center>Instanciar Subagente\nRedactor;
-'|SubRed|
-':<center>Consultar Memoria\nPersistente;
-':<center>Genera Spec\nEjecutable;
-':<center>Registrar en Memoria\nPersistente;
-'|Dev|
-':<center>Verifica Spec\nEjecutable;
-'if (<center>¿La spec es\ntécnicamente viable?) then (<center>No)
-'    repeat
-'        |Dev|
-'        :<center>Comunicar\nobservaciones;
-'        |Coo|
-'        :<center>Reinstanciar Redactor\ncon observaciones;
-'        |SubRed|
-'        :<center>Consultar Memoria\nPersistente;
-'        :<center>Genera Spec\nEjecutable actualizada;
-'        :<center>Registrar en Memoria\nPersistente;
-'        |Dev|
-'    repeat while (<center>¿La spec es\ntécnicamente viable?) is (<center>No) not (<center>Sí)
-'else (<center>Sí)
-'endif
-
-repeat
-    |CooSub|
-    :<center>Generar Diseño\nDetallado;
-
-    |Dev|
-    backward :<center>Comunicar observaciones\na Coordinador de IA;
-
-repeat while (<center>¿Respeta los ADRs registrados\ny es consistente con\nla arquitectura base?) is (<center>No) not (<center>Sí)
-
-'|Coo|
-':<center>Instanciar Subagente\nde Diseño;
-'|SubDis|
-':<center>Consultar Memoria\nPersistente;
-':<center>Genera Diseño\nDetallado;
-':<center>Registrar en Memoria\nPersistente;
-'|Dev|
-'if (<center>¿Respeta los ADRs registrados\ny es consistente con\nla arquitectura base?) then (<center>No)
-'    repeat
-'        |Dev|
-'        :<center>Comunicar\nobservaciones;
-'        |Coo|
-'        :<center>Reinstanciar Subagente de\nDiseño con observaciones;
-'        |SubDis|
-'        :<center>Consultar Memoria\nPersistente;
-'        :<center>Genera Diseño\nDetallado actualizado;
-'        :<center>Registrar en Memoria\nPersistente;
-'        |Dev|
-'    repeat while (<center>¿Respeta los ADRs registrados\ny es consistente con\nla arquitectura base?) is (<center>No) not (<center>Sí)
-'else (<center>Sí)
-'endif
-
-repeat
-    |CooSub|
-    :<center>Generar Código\nFuente;
-
-    |Dev|
-    backward :<center>Comunicar observaciones\na Coordinador de IA;
-
-repeat while (<center>¿Respeta las convenciones\nde código e implementa\ncorrectamente el diseño?) is (<center>No) not (<center>Sí)
-
-'|Coo|
-
-'|Coo|
-':<center>Instanciar Subagente\nde Implementación;
-'|SubImp|
-':<center>Consultar Memoria\nPersistente;
-':<center>Genera Código\nFuente;
-':<center>Registrar en Memoria\nPersistente;
-'|Dev|
-'if (<center>¿Respeta las convenciones\nde código e implementa\ncorrectamente el diseño?) then (<center>No)
-'    repeat
-'        |Dev|
-'        :<center>Comunicar\nobservaciones;
-'        |Coo|
-'        :<center>Reinstanciar Subagente de\nImplementación con observaciones;
-'        |SubImp|
-'        :<center>Consultar Memoria\nPersistente;
-'        :<center>Genera Código\nFuente actualizado;
-'        :<center>Registrar en Memoria\nPersistente;
-'        |Dev|
-'    repeat while (<center>¿Respeta las convenciones\nde código e implementa\ncorrectamente el diseño?) is (<center>No) not (<center>Sí)
-'else (<center>Sí)
-'endif
-
-repeat
-    |CooSub|
-    :<center>Generar Reporte\nde Validación;
-
-    |Dev|
-    backward :<center>Comunicar observaciones\na Coordinador de IA;
-repeat while (<center>¿Todos los criterios\nestán cubiertos?) is (<center>No) not (<center>Si)
-
-if (<center>¿Los tests se ejecutaron\ncorrectamente?) then (<center>Sí)
-else (<center>No)
-    repeat
-        |Dev|
-        :<center>Comunicar observaciones\na Coordinador de IA;
-        |CooSub|
-        :<center>Generar Código\nFuente;
-        |Dev|
-        backward :<center>Comunicar observaciones\na Coordinador de IA;
-    repeat while (<center>¿Los tests se ejecutaron\ncorrectamente?) is (<center>No) not (<center>Sí)
-endif
-'|Coo|
-':<center>Instanciar Subagente\nVerificador;
-'|SubVer|
-':<center>Consultar Memoria\nPersistente;
-':<center>Deriva tests de\nSpec Ejecutable;
-':<center>Ejecuta los tests\ncontra el código;
-':<center>Genera Reporte\nde Validación;
-':<center>Registrar en Memoria\nPersistente;
-'|Dev|
-'if (<center>¿Todos los criterios\nestán cubiertos?) then (<center>No)
-'    repeat
-'    |Dev|
-'    :<center>Comunicar\nobservaciones;
-'    |Coo|
-'    :<center>Reinstanciar Subagente\nVerificador con observaciones;
-'    |SubVer|
-'    :<center>Consultar Memoria\nPersistente;
-'    :<center>Deriva tests actualizados\nde Spec Ejecutable;
-'    :<center>Ejecuta los tests\ncontra el código;
-'    :<center>Genera Reporte\nde Validación;
-'    :<center>Registrar en Memoria\nPersistente;
-'    |Dev|
-'    repeat while (<center>¿Todos los criterios\nestán cubiertos?) is (<center>No) not (<center>Si)
-'else (<center>Si)
-'endif
-'
-'if (<center>¿Los tests se ejecutaron\ncorrectamente?) then (<center>Sí)
-'else (<center>No)
-'    repeat
-'        |Dev|
-'        :<center>Comunicar\nobservaciones;
-'        |Coo|
-'        :<center>Reinstanciar Subagente de\nImplementación con observaciones;
-'        |SubImp|
-'        :<center>Consultar Memoria\nPersistente;
-'        :<center>Genera Código\nFuente actualizado;
-'        :<center>Registrar en Memoria\nPersistente;
-'        |Dev|
-'    repeat while (<center>¿Los tests se ejecutaron\ncorrectamente?) is (<center>No) not (<center>Sí)
-'endif
+:<center>Generar Spec\nEjecutable Válida;
+note left:<center>Se desarrolla en el sub-modelo\n"3.5.2. Pipeline SDD\n(Generar Spec Ejecutable Válida)"
+:<center>Generar Diseño\nDetallado Válido;
+note left:<center>Se desarrolla en el sub-modelo\n"3.5.3. Pipeline SDD\n(Generar Diseño Detallado Válido)"
+:<center>Generar Código\nFuente Válido;
+note left:<center>Se desarrolla en el sub-modelo\n"3.5.4. Pipeline SDD\n(Generar Código Fuente Válido)"
+:<center>Generar Reporte\nde Validación Válido;
+note left:<center>Se desarrolla en el sub-modelo\n"3.5.5. Pipeline SDD\n(Generar Reporte de\nValidación Válido)"
 :<center>Integración continua\ndel producto del Work Item;
 stop
 @enduml
