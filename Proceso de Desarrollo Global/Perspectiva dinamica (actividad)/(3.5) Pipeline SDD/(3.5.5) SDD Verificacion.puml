@@ -69,7 +69,7 @@ repeat
     :<center>Genera Reporte\nde Validación;
     end fork
     :<center>Registrar en Memoria\nPersistente;
-    |Dev|
+    |Desarrollador|
     :<center>Verifica y Valida\nReporte de Validación;
 backward :<center>Comunicar observaciones;
 repeat while (<center>¿Todos los criterios\nestán cubiertos?) is (<center>No) not (<center>Sí)
@@ -88,7 +88,7 @@ else (<center>No)
         :<center>Genera Reporte\nde Validación;
         end fork
         :<center>Registrar en Memoria\nPersistente;
-        |Dev|
+        |Desarrollador|
         :<center>Verifica y Valida\nReporte de Validación;
     repeat while (<center>¿Los tests se ejecutaron\ncorrectamente?) is (<center>No) not (<center>Si)
 endif
