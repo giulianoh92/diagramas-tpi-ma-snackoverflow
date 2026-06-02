@@ -48,7 +48,6 @@ skinparam note {
 }
 
 start
-:<center>Comenzar\npipeline SDD;
 :<center>Instanciar Coordinador\nde IA con Caso de Uso;
 :<center>Generar Spec\nEjecutable Válida;
 note left:<center>Se desarrolla en el sub-modelo\n"Pipeline SDD\n(Generar Spec Ejecutable Válida)"
@@ -58,6 +57,5 @@ note left:<center>Se desarrolla en el sub-modelo\n"Pipeline SDD\n(Generar Diseñ
 note left:<center>Se desarrolla en el sub-modelo\n"Pipeline SDD\n(Generar Código Fuente Válido)"
 :<center>Generar Reporte\nde Validación Válido;
 note left:<center>Se desarrolla en el sub-modelo\n"Pipeline SDD\n(Generar Reporte de\nValidación Válido)"
-:<center>Integración continua\ndel producto del Work Item;
 stop
 @enduml

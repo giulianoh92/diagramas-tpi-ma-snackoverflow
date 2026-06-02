@@ -46,24 +46,39 @@ skinparam note {
     BorderColor     #C9B05E
     FontColor       #3A2E0A
 }
-' FASE CONSTRUCTION
+
+!define ProMan <center>Project\nManager
+!define ProManAna <center>Project\nManager\n+ Analista
+!define Ana <center>Analista
+!define AnaArq <center>Analista\n+ Arquitecto
+!define Arq <center>Arquitecto
+!define Dev <center>Desarrollador
+!define Tes <center>Tester
+
 start
-:Planeamiento de Iteración;
+repeat
+    :<center>Seleccionar Work\nItem Pendiente;
+    :<center>Dividir Work Item\nen Micro-incrementos;
+    repeat
+        :<center>Ejecutar\nPipeline SDD;
+        note left:<center>Se desarrolla en\nel Meta-Modelo de\nPipeline SDD
+        :<center>Integración del Micro-incremento\nal producto de Work Item;
+        :<center>Verificación de\nla integración;
+    repeat while (<center>¿Micro-incrementos\npendientes?) is (Si) not (No)
+    :<center>Integración del Work Item\nal producto del Sprint;
+    :<center>Verificación de\nla integración;
+repeat while (<center>¿Work Items pendientes\nen Sprint?) is (Si) not (No)
+
+:<center>Integración del Sprint\nal Producto Continuo;
+:<center>Verificación de\nla integración;
 fork
-    :<center>Identificar y\nRefinar Requisitos;
-    note right:<center>Se desarrolla en\nel Meta-Modelo del Proceso\nde Ingeniería de Requisitos
+    :<center>Actualizar Work\nItem List;
 fork again
-package Proceso de Desarrollo {
-    :<center>Comenzar\nnuevo Sprint;
-    :<center>Asignar Work Items\na iteración;
-    :<center>Desarrollar Sprint;
-    note right:<center>Se desarrolla en\nel Meta-Modelo del\nProceso de Desarrollo\nde Sprint
-}
+    :<center>Actualizar Lista\nde Riesgos;
 fork again
-    :<center>Configurar y Refinar\nMemoria Persistente;
-fork again
-    :<center>Desarrollar documentación\ndel proyecto;
-endfork
+    :<center>Registrar decisiones\nen Memoria Persistente;
+end fork
+
 stop
 
 @enduml
