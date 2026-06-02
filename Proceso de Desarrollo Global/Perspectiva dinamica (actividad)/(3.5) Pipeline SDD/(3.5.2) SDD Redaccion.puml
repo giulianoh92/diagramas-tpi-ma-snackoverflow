@@ -1,6 +1,6 @@
 @startuml
 skinparam dpi 200
-title <center>3.5.2. Pipeline SDD\n(Generar Spec Ejecutable Válida)
+title <center> Pipeline SDD 1.1\n(Generar Spec Ejecutable Válida)
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA

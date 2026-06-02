@@ -1,6 +1,6 @@
 @startuml
 skinparam dpi 200
-title <center>3.5.3. Pipeline SDD\n(Generar Diseño Detallado Válido)
+title <center>Pipeline SDD 1.2\n(Generar Diseño Detallado Válido)
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA

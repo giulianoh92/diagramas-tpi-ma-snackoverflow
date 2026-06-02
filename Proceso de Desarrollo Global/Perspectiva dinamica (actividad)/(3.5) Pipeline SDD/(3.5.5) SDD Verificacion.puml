@@ -1,6 +1,6 @@
 @startuml
 skinparam dpi 200
-title  <center>Pipeline SDD\n(Generar Reporte de Validación Válido)
+title  <center>Pipeline SDD 1.4\n(Generar Reporte de Validación Válido)
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
