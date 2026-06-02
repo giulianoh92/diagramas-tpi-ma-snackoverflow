@@ -1,6 +1,6 @@
 @startuml
 skinparam dpi 200
-title <center>3.5.1. Pipeline SDD
+title <center> Pipeline SDD 
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
@@ -51,13 +51,13 @@ start
 :<center>Comenzar\npipeline SDD;
 :<center>Instanciar Coordinador\nde IA con Caso de Uso;
 :<center>Generar Spec\nEjecutable Válida;
-note left:<center>Se desarrolla en el sub-modelo\n"3.5.2. Pipeline SDD\n(Generar Spec Ejecutable Válida)"
+note left:<center>Se desarrolla en el sub-modelo\n"Pipeline SDD\n(Generar Spec Ejecutable Válida)"
 :<center>Generar Diseño\nDetallado Válido;
-note left:<center>Se desarrolla en el sub-modelo\n"3.5.3. Pipeline SDD\n(Generar Diseño Detallado Válido)"
+note left:<center>Se desarrolla en el sub-modelo\n"Pipeline SDD\n(Generar Diseño Detallado Válido)"
 :<center>Generar Código\nFuente Válido;
-note left:<center>Se desarrolla en el sub-modelo\n"3.5.4. Pipeline SDD\n(Generar Código Fuente Válido)"
+note left:<center>Se desarrolla en el sub-modelo\n"Pipeline SDD\n(Generar Código Fuente Válido)"
 :<center>Generar Reporte\nde Validación Válido;
-note left:<center>Se desarrolla en el sub-modelo\n"3.5.5. Pipeline SDD\n(Generar Reporte de\nValidación Válido)"
+note left:<center>Se desarrolla en el sub-modelo\n"Pipeline SDD\n(Generar Reporte de\nValidación Válido)"
 :<center>Integración continua\ndel producto del Work Item;
 stop
 @enduml

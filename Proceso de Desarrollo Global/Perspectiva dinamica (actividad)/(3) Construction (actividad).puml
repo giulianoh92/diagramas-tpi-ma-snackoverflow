@@ -57,7 +57,7 @@ package Proceso de Desarrollo {
     :<center>Comenzar\nnuevo Sprint;
     :<center>Asignar Work Items\na iteración;
     :<center>Desarrollar Sprint;
-    note right:<center>Se desarrolla en\nel Meta-Modelo del\nProceso de Diseño
+    note right:<center>Se desarrolla en\nel Meta-Modelo del\nProceso de Desarrollo\nde Sprint
 }
 fork again
     :<center>Configurar y Refinar\nMemoria Persistente;
