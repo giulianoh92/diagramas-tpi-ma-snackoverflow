@@ -1,6 +1,6 @@
 @startuml FaseConstruccion
 skinparam dpi 200
-title  Meta-Modelo Del Proceso De Desarrollo Global (Fase de Construcción)
+title  Meta-Modelo Del Proceso De Desarrollo de Sprint
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
