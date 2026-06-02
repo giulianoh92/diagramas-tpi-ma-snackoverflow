@@ -1,0 +1,47 @@
+@startuml
+
+left to right direction
+
+actor "Cliente" as cliente
+
+rectangle "Plataforma de Oficios" {
+
+  usecase "Registrarse / Iniciar sesión" as UC1
+  usecase "Buscar prestadores" as UC2
+  usecase "Filtrar por oficio" as UC3
+  usecase "Filtrar por zona geográfica" as UC4
+  usecase "Filtrar por disponibilidad horaria" as UC5
+  usecase "Ver perfil del prestador" as UC6
+  usecase "Consultar habilitaciones verificadas" as UC7
+  usecase "Consultar calificaciones y reseñas" as UC8
+  usecase "Solicitar contratación" as UC9
+  usecase "Seleccionar franja horaria" as UC10
+  usecase "Realizar pago" as UC11
+  usecase "Confirmar finalización del servicio" as UC12
+  usecase "Calificar al prestador" as UC13
+  usecase "Ver historial de contrataciones" as UC14
+
+}
+
+cliente --> UC1
+cliente --> UC2
+cliente --> UC6
+cliente --> UC9
+cliente --> UC11
+cliente --> UC12
+cliente --> UC13
+cliente --> UC14
+
+UC2 ..> UC3 : <<extend>>
+UC2 ..> UC4 : <<extend>>
+UC2 ..> UC5 : <<extend>>
+
+UC6 ..> UC7 : <<include>>
+UC6 ..> UC8 : <<include>>
+
+UC9 ..> UC10 : <<include>>
+UC9 ..> UC11 : <<include>>
+
+UC12 ..> UC13 : <<include>>
+
+@enduml
