@@ -4,6 +4,8 @@ left to right direction
 
 actor "Cliente" as cliente
 
+skinparam linetype polyline
+
 rectangle "Plataforma de Oficios" {
 
   usecase "Registrarse / Iniciar sesión" as UC1
