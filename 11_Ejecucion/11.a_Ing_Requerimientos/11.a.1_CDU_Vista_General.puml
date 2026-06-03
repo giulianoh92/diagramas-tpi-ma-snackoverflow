@@ -35,7 +35,7 @@ rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
   usecase "UC17\nGestionar perfiles\n(suspensión / baja)" as UC17
   usecase "UC18\nVerificar habilitaciones\nprofesionales" as UC18
 
-  ' --- Auxiliares (sin actor directo: incluidos / extendidos) ---
+  ' --- Auxiliares (sin actor directo: comportamiento interno del sistema) ---
   usecase "UC09\nGestionar estados\nde la contratación" as UC09
   usecase "UC19\nNotificar cambio\nde estado" as UC19
 }
@@ -64,7 +64,8 @@ A --> UC17
 A --> UC18
 
 ' Precondición común (no se diagrama): los CU con sesión requieren «UC02 Autenticarse».
-UC19 ..> UC09 : <<extend>>
+' UC09 «include» UC19: toda transición válida notifica a ambas partes de forma incondicional (RF-6.5).
+UC09 ..> UC19 : <<include>>
 
 
 UC09 -[hidden]-> PP

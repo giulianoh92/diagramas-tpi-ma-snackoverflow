@@ -24,9 +24,10 @@ C --> UC11
 P --> UC11
 
 ' Precondición común (no se diagrama): UC07, UC08, UC10 y UC11 requieren «UC02 Autenticarse».
-UC19 ..> UC09 : <<extend>>
+UC09 ..> UC19 : <<include>>
 
 ' Nota (UC09): Comportamiento del sistema — centraliza la máquina de estados de la
 ' contratación. Las transiciones se disparan desde UC07, UC08, UC10 y UC13.
-' Detalle en la especificación de UC09.
+' Nota (UC09 «include» UC19): toda transición válida notifica a ambas partes de forma
+' incondicional (RF-6.5); por eso es «include» y no «extend». Detalle en la especificación de UC09.
 @enduml
