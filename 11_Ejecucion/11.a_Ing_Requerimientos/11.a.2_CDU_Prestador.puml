@@ -1,0 +1,105 @@
+@startuml
+
+left to right direction
+skinparam linetype polyline
+
+' === Modern soft theme ===
+skinparam backgroundColor #FAFAFA
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 11
+skinparam titleFontSize 16
+skinparam titleFontStyle bold
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam nodesep 25
+skinparam ranksep 40
+skinparam linetype polyline
+
+skinparam usecase {
+    BackgroundColor       #C9DFEE
+    BorderColor           #000000
+    FontColor             #000000
+    FontName              Helvetica
+    FontSize              11
+}
+
+skinparam actor {
+    BackgroundColor       #C9DFEE
+    BorderColor           #000000
+    FontColor             #000000
+    FontName              Helvetica
+    FontSize              11
+}
+
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor     #C9C9BE
+    FontColor       #4A4A48
+    FontStyle       bold
+    FontSize        12
+}
+
+skinparam arrow {
+    Color     #090D10
+    FontColor #090D10
+    FontSize  10
+    Thickness 1
+}
+
+skinparam note {
+    BackgroundColor #FFF8E1
+    BorderColor     #C9B05E
+    FontColor       #3A2E0A
+}
+
+actor "Prestador" as prestador
+
+rectangle "Plataforma de Oficios" {
+
+  usecase "Registrarse / Iniciar sesión" as login
+  usecase "Cargar habilitaciones profesionales" as cargarHabilitaciones
+
+  usecase "Marcar servicio en curso" as marcarServicioEnCurso
+  usecase "Marcar servicio finalizado" as marcarServicioFinalizado
+  usecase "Calificar al cliente" as calificarCliente
+
+  usecase "Gestionar perfil" as gestionarPerfil
+  usecase "Definir oficios y tarifas" as definirOficiosTarifas
+  usecase "Definir zona de cobertura" as definirZonaCobertura
+
+  usecase "Gestionar solicitudes de contratación" as gestionarSolicitudes
+  usecase "Aceptar solicitud" as aceptarSolicitud
+  usecase "Rechazar solicitud" as rechazarSolicitud
+
+  usecase "Gestionar disponibilidad horaria" as gestionarDisponibilidad
+  usecase "Agregar franja horaria" as agregarFranjaHoraria
+  usecase "Eliminar franja horaria" as eliminarFranjaHoraria
+
+  usecase "Ver historial de contrataciones" as verHistorialContrataciones
+  usecase "Ver reputación y calificaciones recibidas" as verReputacion
+}
+
+prestador ----> login
+prestador --> cargarHabilitaciones
+prestador --> gestionarPerfil
+prestador --> gestionarDisponibilidad
+prestador --> gestionarSolicitudes
+prestador --> marcarServicioEnCurso
+prestador --> marcarServicioFinalizado
+prestador --> verHistorialContrataciones
+prestador --> verReputacion
+
+cargarHabilitaciones ..> login : <<include>>
+
+gestionarPerfil ..> definirOficiosTarifas : <<extend>>
+gestionarPerfil ..> definirZonaCobertura : <<extend>>
+
+gestionarDisponibilidad ..> agregarFranjaHoraria : <<extend>>
+gestionarDisponibilidad ..> eliminarFranjaHoraria : <<extend>>
+
+gestionarSolicitudes ..> aceptarSolicitud : <<extend>>
+gestionarSolicitudes ..> rechazarSolicitud : <<extend>>
+
+marcarServicioFinalizado ..> calificarCliente : <<include>>
+
+@enduml
