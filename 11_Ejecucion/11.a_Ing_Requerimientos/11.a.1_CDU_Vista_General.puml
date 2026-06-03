@@ -65,7 +65,7 @@ A --> UC18
 
 ' Precondición común (no se diagrama): los CU con sesión requieren «UC02 Autenticarse».
 ' UC09 «include» UC19: toda transición válida notifica a ambas partes de forma incondicional (RF-6.5).
-UC09 ..> UC19 : <<include>>
+UC19 <.. UC09 : <<include>>
 
 
 UC09 -[hidden]-> PP
