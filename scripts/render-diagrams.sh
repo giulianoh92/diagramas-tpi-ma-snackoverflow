@@ -75,12 +75,14 @@ render_plantuml() {
 
 for src in **/*.mmd; do
   [[ "$src" == node_modules/* ]] && continue
+  [[ "$src" == *_Viejo/* ]] && continue   # deprecados, fuera de la entrega
   found=1
   render_mermaid "$src"
 done
 
 for src in **/*.puml; do
   [[ "$src" == node_modules/* ]] && continue
+  [[ "$src" == *_Viejo/* ]] && continue   # deprecados, fuera de la entrega
   found=1
   render_plantuml "$src"
 done
