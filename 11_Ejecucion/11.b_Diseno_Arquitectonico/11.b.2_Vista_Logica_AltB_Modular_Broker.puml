@@ -64,10 +64,4 @@ MHab --> AHab
 APag --> MP
 AMsg --> MS
 AHab --> OR
-
-note bottom of Brk
-  Cada proveedor externo queda detrás de un puerto/adaptador:
-  reemplazarlo no toca la lógica de negocio (RNF-M.4 ≤40 h).
-  Aísla las integraciones (RNF-S) a costa de complejidad adicional.
-end note
 @enduml

@@ -15,19 +15,20 @@ component "API Gateway" as GW
 
 package "Servicios independientes (database-per-service)" as SVCS {
   component "Servicio\nUsuarios" as SUsr
-  database "DB Usuarios" as DBu
   component "Servicio\nCatálogo" as SCat
-  database "DB Catálogo" as DBc
   component "Servicio\nContratación" as SCon
-  database "DB Contratación" as DBn
   component "Servicio\nPagos" as SPag
-  database "DB Pagos" as DBp
-  component "Servicio\nReputación" as SRep
-  database "DB Reputación" as DBr
   component "Servicio\nHabilitaciones" as SHab
-  database "DB Habilitac." as DBh
+  component "Servicio\nReputación" as SRep
   component "Servicio\nNotificaciones" as SNot
 }
+
+database "DB Usuarios" as DBu
+database "DB Catálogo" as DBc
+database "DB Contratación" as DBn
+database "DB Pagos" as DBp
+database "DB Habilitac." as DBh
+database "DB Reputación" as DBr
 
 queue "Bus de eventos\n(Message Broker)" as BUS
 
@@ -41,31 +42,25 @@ GW --> SUsr
 GW --> SCat
 GW --> SCon
 GW --> SPag
-GW --> SRep
 GW --> SHab
+GW --> SRep
 
 SUsr --> DBu
 SCat --> DBc
 SCon --> DBn
 SPag --> DBp
-SRep --> DBr
 SHab --> DBh
+SRep --> DBr
 
-' Comunicación asíncrona por eventos
+' Publicación de eventos (asíncrona)
 SCon ..> BUS
 SPag ..> BUS
 SHab ..> BUS
-BUS ..> SNot
+' Suscripción a eventos
 BUS ..> SRep
+BUS ..> SNot
 
 SPag --> MP
-SNot --> MS
 SHab --> OR
-
-note bottom of SVCS
-  Escalado y despliegue independientes por servicio (RNF-E.2);
-  aísla fallos y seguridad por dominio. Penaliza la simplicidad y
-  el uptime operacional (más piezas, consistencia eventual): costo
-  difícil de justificar para un equipo pequeño (alternativa de contraste).
-end note
+SNot --> MS
 @enduml

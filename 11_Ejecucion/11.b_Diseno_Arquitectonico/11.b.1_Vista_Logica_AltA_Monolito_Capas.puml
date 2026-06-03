@@ -50,12 +50,4 @@ Repo --> PG
 MPag --> MP
 MNot --> MS
 MHab --> OR
-
-note bottom of A
-  Acoplamiento directo a proveedores externos:
-  un cambio de proveedor impacta el módulo de negocio.
-  Prioriza simplicidad y time-to-market (RNF-A, micro-incrementos
-  OpenUP); penaliza RNF-M.4 (sustitución de proveedor) y el
-  escalado independiente por módulo.
-end note
 @enduml
