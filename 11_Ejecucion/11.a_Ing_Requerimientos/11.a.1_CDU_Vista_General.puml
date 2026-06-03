@@ -66,6 +66,10 @@ A --> UC18
 ' Precondición común (no se diagrama): los CU con sesión requieren «UC02 Autenticarse».
 UC19 ..> UC09 : <<extend>>
 
+
+UC09 -[hidden]-> PP
+UC09 -[hidden]-> OR
+
 UC12 --> PP
 UC13 --> PP
 UC18 --> OR
