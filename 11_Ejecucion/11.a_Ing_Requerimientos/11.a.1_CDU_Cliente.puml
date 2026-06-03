@@ -1,7 +1,6 @@
 @startuml
-
+title Casos de Uso principales (Cliente)
 left to right direction
-skinparam linetype polyline
 
 ' === Modern soft theme ===
 skinparam backgroundColor #FAFAFA
