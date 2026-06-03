@@ -1,0 +1,78 @@
+@startuml
+title Casos de Uso — Acceso y gestión de cuentas (RF-1)
+left to right direction
+
+' === Modern soft theme ===
+skinparam backgroundColor #FAFAFA
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 11
+skinparam titleFontSize 16
+skinparam titleFontStyle bold
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam nodesep 25
+skinparam ranksep 40
+skinparam linetype polyline
+
+skinparam usecase {
+    BackgroundColor       #C9DFEE
+    BorderColor           #000000
+    FontColor             #000000
+    FontName              Helvetica
+    FontSize              11
+}
+
+skinparam actor {
+    BackgroundColor       #C9DFEE
+    BorderColor           #000000
+    FontColor             #000000
+    FontName              Helvetica
+    FontSize              11
+}
+
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor     #C9C9BE
+    FontColor       #4A4A48
+    FontStyle       bold
+    FontSize        12
+}
+
+skinparam arrow {
+    Color     #090D10
+    FontColor #090D10
+    FontSize  10
+    Thickness 1
+}
+
+skinparam note {
+    BackgroundColor #FFF8E1
+    BorderColor     #C9B05E
+    FontColor       #3A2E0A
+}
+
+actor Cliente as C
+actor Prestador as P
+actor Administrador as A
+
+rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
+  usecase "UC01\nRegistrarse" as UC01
+  usecase "UC02\nAutenticarse" as UC02
+  usecase "UC03\nGestionar perfil" as UC03
+  usecase "UC17\nGestionar perfiles\n(suspensión / baja)" as UC17
+}
+
+C --> UC01
+P --> UC01
+C --> UC03
+P --> UC03
+A --> UC17
+
+UC03 ..> UC02 : <<include>>
+UC17 ..> UC02 : <<include>>
+
+note bottom of UC01
+  Acceso público: no requiere
+  sesión iniciada (sin <<include>> de UC02).
+end note
+@enduml

@@ -61,6 +61,30 @@ Cada disciplina trae perspectiva estática (`E`, clases) y dinámica (`D`, activ
 - `08.E_Estatica_Clases` / `08.D_Dinamica_Actividad`
 - `09.E_Estatica_Clases` / `09.D_Dinamica_Actividad`
 
+### §11.a — Casos de Uso (CDU)
+
+Dos vistas complementarias del mismo modelo de requisitos:
+
+- **Por actor** (`11.a.1`–`11.a.3`): recorte detallado de las interacciones de cada actor.
+
+| Archivo | Diagrama |
+|---|---|
+| `11.a.1_CDU_Cliente` | CDU del actor Cliente |
+| `11.a.2_CDU_Prestador` | CDU del actor Prestador |
+| `11.a.3_CDU_Administrador` | CDU del actor Administrador |
+
+- **Por subconjunto funcional** (`11.a.4`–`11.a.10`): vista trazada 1:1 a la tabla `UC01`–`UC19` del documento, siguiendo la recomendación de OpenUP de varios diagramas, cada uno con un subconjunto del modelo.
+
+| Archivo | Diagrama |
+|---|---|
+| `11.a.4_CDU_Vista_General` | Modelo completo (UC01–UC19, 5 actores) |
+| `11.a.5_CDU_Acceso_y_Cuentas` | RF-1 — UC01, UC02, UC03, UC17 |
+| `11.a.6_CDU_Catalogo_y_Agenda` | RF-2/RF-4 — UC04, UC05, UC06 |
+| `11.a.7_CDU_Contratacion_y_Estados` | RF-5/RF-6 — UC07, UC08, UC09, UC10, UC11, UC19 |
+| `11.a.8_CDU_Pagos` | RF-7 — UC12, UC13 |
+| `11.a.9_CDU_Reputacion_y_Moderacion` | RF-3 — UC14, UC15, UC16 |
+| `11.a.10_CDU_Habilitaciones_Profesionales` | RF-8 — UC18 |
+
 ## Renderizado
 
 `scripts/render-diagrams.sh` busca recursivamente todo `*.mmd`/`*.puml` y genera
