@@ -2,54 +2,7 @@
 title Casos de Uso — Reputación y moderación (RF-3)
 left to right direction
 
-' === Modern soft theme ===
-skinparam backgroundColor #FAFAFA
-skinparam defaultFontName Helvetica
-skinparam defaultFontSize 11
-skinparam titleFontSize 16
-skinparam titleFontStyle bold
-skinparam shadowing false
-skinparam roundCorner 14
-skinparam nodesep 25
-skinparam ranksep 40
-skinparam linetype polyline
-
-skinparam usecase {
-    BackgroundColor       #C9DFEE
-    BorderColor           #000000
-    FontColor             #000000
-    FontName              Helvetica
-    FontSize              11
-}
-
-skinparam actor {
-    BackgroundColor       #C9DFEE
-    BorderColor           #000000
-    FontColor             #000000
-    FontName              Helvetica
-    FontSize              11
-}
-
-skinparam rectangle {
-    BackgroundColor #FFFFFF
-    BorderColor     #C9C9BE
-    FontColor       #4A4A48
-    FontStyle       bold
-    FontSize        12
-}
-
-skinparam arrow {
-    Color     #090D10
-    FontColor #090D10
-    FontSize  10
-    Thickness 1
-}
-
-skinparam note {
-    BackgroundColor #FFF8E1
-    BorderColor     #C9B05E
-    FontColor       #3A2E0A
-}
+!include ../../00_Comun/00.0_Estilo_Comun.iuml
 
 actor Cliente as C
 actor Prestador as P

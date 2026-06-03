@@ -1,51 +1,5 @@
 @startuml
-skinparam dpi 200
-title  Meta-Modelo del Ciclo de Vida de Desarrollo
-
-' === Modern soft theme ===
-skinparam backgroundColor #FAFAFA
-skinparam defaultFontName Helvetica
-skinparam defaultFontSize 11
-skinparam titleFontSize 16
-skinparam titleFontStyle bold
-skinparam shadowing false
-skinparam roundCorner 14d
-skinparam linetype polyline
-
-skinparam activity {
-    BackgroundColor       #C9DFEE
-    BorderColor           #000000
-    FontColor             #000000
-    FontName              Helvetica
-    FontSize              11
-    DiamondBackgroundColor #D9C2E3
-    DiamondBorderColor    #000000
-    DiamondFontColor      #000000
-    StartColor            #000000
-    EndColor              #000000
-    BarColor              #000000
-}
-
-skinparam partition {
-    BackgroundColor #FFFFFF
-    BorderColor     #C9C9BE
-    FontColor       #4A4A48
-    FontStyle       bold
-    FontSize        12
-}
-
-skinparam arrow {
-    Color     #090D10
-    FontColor #090D10
-    FontSize  10
-    Thickness 1
-}
-
-skinparam note {
-    BackgroundColor #FFF8E1
-    BorderColor     #C9B05E
-    FontColor       #3A2E0A
-}
+!include ../../00_Comun/00.0_Estilo_Comun.iuml
 
 start
 repeat
