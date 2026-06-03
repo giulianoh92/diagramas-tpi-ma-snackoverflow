@@ -1,4 +1,4 @@
-@startuml FaseConstruccion
+@startuml
 skinparam dpi 200
 title  Meta-Modelo Del Proceso De Desarrollo de Sprint
 

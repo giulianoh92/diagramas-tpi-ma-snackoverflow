@@ -1,4 +1,4 @@
-@startuml FaseInicio
+@startuml
 skinparam dpi 200
 title  Meta-Modelo Del Proceso De Desarrollo Global (Fase de Inicio)
 
@@ -65,3 +65,4 @@ fork again
     :<center>Crear Work\nItem List inicial;
 endfork
 stop
+@enduml
