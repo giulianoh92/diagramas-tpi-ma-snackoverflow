@@ -8,7 +8,6 @@ actor Cliente as C
 actor Prestador as P
 
 rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
-  usecase "UC02\nAutenticarse" as UC02
   usecase "UC04\nBuscar prestadores" as UC04
   usecase "UC05\nPublicar servicios" as UC05
   usecase "UC06\nGestionar agenda\ny disponibilidad" as UC06
@@ -18,11 +17,6 @@ C --> UC04
 P --> UC05
 P --> UC06
 
-UC05 ..> UC02 : <<include>>
-UC06 ..> UC02 : <<include>>
-
-note bottom of UC04
-  Acceso público: la búsqueda
-  no requiere sesión iniciada.
-end note
+' Precondición común (no se diagrama): UC05 y UC06 requieren «UC02 Autenticarse».
+' Nota (UC04): Acceso público — la búsqueda no requiere sesión iniciada.
 @enduml

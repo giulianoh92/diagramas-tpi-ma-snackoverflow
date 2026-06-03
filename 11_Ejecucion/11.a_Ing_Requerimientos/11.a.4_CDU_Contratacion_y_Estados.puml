@@ -8,7 +8,6 @@ actor Cliente as C
 actor Prestador as P
 
 rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
-  usecase "UC02\nAutenticarse" as UC02
   usecase "UC07\nSolicitar contratación" as UC07
   usecase "UC08\nResponder solicitud\n(aceptar / rechazar / alternativa)" as UC08
   usecase "UC09\nGestionar estados\nde la contratación" as UC09
@@ -24,17 +23,10 @@ P --> UC10
 C --> UC11
 P --> UC11
 
-UC07 ..> UC02 : <<include>>
-UC08 ..> UC02 : <<include>>
-UC10 ..> UC02 : <<include>>
-UC11 ..> UC02 : <<include>>
+' Precondición común (no se diagrama): UC07, UC08, UC10 y UC11 requieren «UC02 Autenticarse».
 UC19 ..> UC09 : <<extend>>
 
-note bottom of UC09
-  Comportamiento del sistema: centraliza la
-  máquina de estados de la contratación.
-  Las transiciones se disparan desde UC07,
-  UC08, UC10 y UC13. Detalle en la
-  especificación de UC09.
-end note
+' Nota (UC09): Comportamiento del sistema — centraliza la máquina de estados de la
+' contratación. Las transiciones se disparan desde UC07, UC08, UC10 y UC13.
+' Detalle en la especificación de UC09.
 @enduml

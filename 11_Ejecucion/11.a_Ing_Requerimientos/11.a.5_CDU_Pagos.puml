@@ -9,7 +9,6 @@ actor Prestador as P
 actor "Pasarela\nde Pagos" as PP <<sistema externo>>
 
 rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
-  usecase "UC02\nAutenticarse" as UC02
   usecase "UC12\nPagar servicio" as UC12
   usecase "UC13\nConfirmar finalización\ny liberar pago" as UC13
 }
@@ -17,9 +16,7 @@ rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
 C --> UC12
 P --> UC13
 
-UC12 ..> UC02 : <<include>>
-UC13 ..> UC02 : <<include>>
-
+' Precondición común (no se diagrama): UC12 y UC13 requieren «UC02 Autenticarse».
 UC12 --> PP
 UC13 --> PP
 @enduml

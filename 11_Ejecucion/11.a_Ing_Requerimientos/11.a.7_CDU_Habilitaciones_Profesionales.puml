@@ -8,12 +8,11 @@ actor Administrador as A
 actor "Organismo\nRegulador" as OR <<sistema externo>>
 
 rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
-  usecase "UC02\nAutenticarse" as UC02
   usecase "UC18\nVerificar habilitaciones\nprofesionales" as UC18
 }
 
 A --> UC18
 
-UC18 ..> UC02 : <<include>>
+' Precondición común (no se diagrama): UC18 requiere «UC02 Autenticarse».
 UC18 --> OR
 @enduml

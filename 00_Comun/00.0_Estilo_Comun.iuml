@@ -21,7 +21,7 @@ skinparam shadowing false
 skinparam roundCorner 14
 skinparam nodesep 25
 skinparam ranksep 40
-skinparam linetype polyline
+skinparam linetype splines
 
 ' --- Casos de uso ---
 skinparam usecase {

@@ -10,7 +10,6 @@ actor Administrador as A
 
 rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
   usecase "UC01\nRegistrarse" as UC01
-  usecase "UC02\nAutenticarse" as UC02
   usecase "UC03\nGestionar perfil" as UC03
   usecase "UC17\nGestionar perfiles\n(suspensión / baja)" as UC17
 }
@@ -21,11 +20,6 @@ C --> UC03
 P --> UC03
 A --> UC17
 
-UC03 ..> UC02 : <<include>>
-UC17 ..> UC02 : <<include>>
-
-note bottom of UC01
-  Acceso público: no requiere
-  sesión iniciada (sin <<include>> de UC02).
-end note
+' Precondición común (no se diagrama): UC03 y UC17 requieren «UC02 Autenticarse».
+' Nota (UC01): Acceso público — no requiere sesión iniciada.
 @enduml

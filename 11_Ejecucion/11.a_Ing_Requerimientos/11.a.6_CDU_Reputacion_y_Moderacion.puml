@@ -9,7 +9,6 @@ actor Prestador as P
 actor Administrador as A
 
 rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
-  usecase "UC02\nAutenticarse" as UC02
   usecase "UC14\nCalificar prestador" as UC14
   usecase "UC15\nResponder reseña" as UC15
   usecase "UC16\nModerar reseñas" as UC16
@@ -19,7 +18,5 @@ C --> UC14
 P --> UC15
 A --> UC16
 
-UC14 ..> UC02 : <<include>>
-UC15 ..> UC02 : <<include>>
-UC16 ..> UC02 : <<include>>
+' Precondición común (no se diagrama): UC14, UC15 y UC16 requieren «UC02 Autenticarse».
 @enduml
