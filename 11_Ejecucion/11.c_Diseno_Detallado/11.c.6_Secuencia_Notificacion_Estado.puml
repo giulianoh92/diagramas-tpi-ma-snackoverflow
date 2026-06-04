@@ -1,0 +1,27 @@
+@startuml
+title 11.c — Secuencia · Notificación de cambio de estado (UC09 → UC19, colaboración State + Observer)
+
+!include ../../00_Comun/00.0_Estilo_Comun.iuml
+
+participant "c:Contratacion" as C
+participant "e:Solicitada" as E
+participant "oc:NotificadorCliente" as OC
+participant "op:NotificadorPrestador" as OP
+participant "am:AdaptadorMensajeria" as AM
+participant "Proveedor de Mensajería" as PM <<sistema externo>>
+
+C -> E : aceptar(c)
+E -> C : setEstado(Confirmada)
+C -> C : notificar()
+
+group loop observadores [por cada parte suscripta]
+  C -> OC : actualizar(c)
+  OC -> AM : enviar(mensaje)
+  AM -> PM : send(mensaje)
+  PM --> AM : ack
+  C -> OP : actualizar(c)
+  OP -> AM : enviar(mensaje)
+  AM -> PM : send(mensaje)
+  PM --> AM : ack
+end
+@enduml

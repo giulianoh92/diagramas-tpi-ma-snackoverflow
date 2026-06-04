@@ -1,0 +1,34 @@
+@startuml
+title 11.c — Secuencia · Pago de un servicio (UC12)
+
+!include ../../00_Comun/00.0_Estilo_Comun.iuml
+
+actor Cliente
+participant ":ModuloPagos" as MP
+participant "fp:FabricaPasarela" as FP
+participant "pp:AdaptadorMercadoPago" as AD
+participant "SDK Mercado Pago" as SDK <<sistema externo>>
+participant "c:Contratacion" as C
+
+Cliente -> MP : pagar(c)
+MP -> FP : crear(config)
+FP --> MP : pp : PasarelaPago
+MP -> AD : cobrar(monto)
+AD -> SDK : createPayment(monto)
+SDK --> AD : aprobado(ref)
+AD --> MP : Resultado(aprobado, ref)
+
+alt pago aprobado
+  MP -> C : registrarPagoRetenido(ref)
+  C --> MP : ok
+  MP --> Cliente : pago retenido
+else pago rechazado
+  MP --> Cliente : informar rechazo (reintentar o desistir)
+else sin respuesta de la pasarela
+  MP -> AD : consultarEstado(ref)
+  AD -> SDK : getPayment(ref)
+  SDK --> AD : pendiente
+  AD --> MP : pendiente
+  MP --> Cliente : pago pendiente, sin retención
+end
+@enduml
