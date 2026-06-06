@@ -16,6 +16,7 @@ rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
   usecase "UC07\nSolicitar contratación" as UC07
   usecase "UC12\nPagar servicio" as UC12
   usecase "UC14\nCalificar prestador" as UC14
+  usecase "UC21\nResponder propuesta\nde prestador" as UC21
 
   ' --- Compartidos Cliente + Prestador (en el límite entre ambos) ---
   usecase "UC01\nRegistrarse" as UC01
@@ -45,6 +46,7 @@ C --> UC01
 C --> UC03
 C --> UC04
 C --> UC07
+C --> UC21
 C --> UC10
 C --> UC11
 C --> UC12
