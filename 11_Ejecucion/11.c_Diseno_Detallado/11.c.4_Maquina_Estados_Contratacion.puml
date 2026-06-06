@@ -8,7 +8,7 @@ title 11.c — Máquina de estados · Ciclo de vida de la Contratación (UC09)
 Solicitada --> Confirmada : aceptar (UC08)
 Solicitada --> Cancelada : rechazar (UC08) /\ncancelar (UC10)
 
-Confirmada --> EnCurso : iniciar servicio
+Confirmada --> EnCurso : iniciar servicio (UC20)
 Confirmada --> Cancelada : cancelar (UC10)
 
 EnCurso --> Finalizada : confirmar finalización\ny liberar pago (UC13)

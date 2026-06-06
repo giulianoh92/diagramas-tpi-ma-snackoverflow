@@ -29,6 +29,7 @@ rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
   usecase "UC08\nResponder solicitud\n(aceptar / rechazar / alternativa)" as UC08
   usecase "UC13\nConfirmar finalización\ny liberar pago" as UC13
   usecase "UC15\nResponder reseña" as UC15
+  usecase "UC20\nIniciar servicio" as UC20
 
   ' --- Exclusivos de Administrador ---
   usecase "UC16\nModerar reseñas" as UC16
@@ -58,6 +59,7 @@ P --> UC10
 P --> UC11
 P --> UC13
 P --> UC15
+P --> UC20
 
 A --> UC16
 A --> UC17
