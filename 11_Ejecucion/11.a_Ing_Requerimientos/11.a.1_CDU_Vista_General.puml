@@ -27,7 +27,7 @@ rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
   ' --- Exclusivos de Prestador ---
   usecase "UC05\nPublicar servicios" as UC05
   usecase "UC06\nGestionar agenda\ny disponibilidad" as UC06
-  usecase "UC08\nResponder solicitud\n(aceptar / rechazar / alternativa)" as UC08
+  usecase "UC08\nEnviar propuesta\no rechazar solicitud" as UC08
   usecase "UC13\nConfirmar finalización\ny liberar pago" as UC13
   usecase "UC15\nResponder reseña" as UC15
   usecase "UC20\nIniciar servicio" as UC20

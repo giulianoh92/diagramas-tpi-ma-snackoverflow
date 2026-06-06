@@ -9,7 +9,7 @@ actor Prestador as P
 
 rectangle "Plataforma de Economía Colaborativa Basada en Oficios" {
   usecase "UC07\nSolicitar contratación" as UC07
-  usecase "UC08\nResponder solicitud\n(aceptar / rechazar / alternativa)" as UC08
+  usecase "UC08\nEnviar propuesta\no rechazar solicitud" as UC08
   usecase "UC09\nGestionar estados\nde la contratación" as UC09
   usecase "UC10\nCancelar contratación" as UC10
   usecase "UC11\nIntercambiar mensajes" as UC11

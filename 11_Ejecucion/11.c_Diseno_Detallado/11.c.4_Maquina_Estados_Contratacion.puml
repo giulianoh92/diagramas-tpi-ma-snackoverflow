@@ -5,8 +5,11 @@ title 11.c — Máquina de estados · Ciclo de vida de la Contratación (UC09)
 
 [*] --> Solicitada : solicitar (UC07)
 
-Solicitada --> Confirmada : aceptar (UC08)\naceptar propuesta (UC21)
-Solicitada --> Cancelada : rechazar (UC08) /\nrechazar propuesta (UC21) /\ncancelar (UC10)
+Solicitada --> Presupuestada : enviar propuesta (UC08)
+Solicitada --> Cancelada : rechazar (UC08) /\ncancelar (UC10)
+
+Presupuestada --> Confirmada : aceptar propuesta (UC21)
+Presupuestada --> Cancelada : rechazar propuesta (UC21) /\ncancelar (UC10)
 
 Confirmada --> EnCurso : iniciar servicio (UC20)
 Confirmada --> Cancelada : cancelar (UC10)
