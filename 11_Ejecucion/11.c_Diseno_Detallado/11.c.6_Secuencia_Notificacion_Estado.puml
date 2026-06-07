@@ -10,18 +10,39 @@ participant "op:NotificadorPrestador" as OP
 participant "am:AdaptadorMensajeria" as AM
 participant "Proveedor de Mensajería" as PM <<sistema externo>>
 
+activate C
 C -> E : aceptar(c)
-E -> C : setEstado(Confirmada)
+activate E
+  E -> C : setEstado(Confirmada)
+deactivate E
+
 C -> C : notificar()
 
-group loop observadores [por cada parte suscripta]
-  C -> OC : actualizar(c)
-  OC -> AM : enviar(mensaje)
-  AM -> PM : send(mensaje)
-  PM --> AM : ack
-  C -> OP : actualizar(c)
-  OP -> AM : enviar(mensaje)
-  AM -> PM : send(mensaje)
-  PM --> AM : ack
-end
+  group loop observadores [por cada parte suscripta]
+
+    C -> OC : actualizar(c)
+    activate OC
+      OC -> AM : enviar(mensaje)
+      activate AM
+        AM -> PM : send(mensaje)
+        activate PM
+        PM --> AM : ack
+        deactivate PM
+      deactivate AM
+    
+
+    C -> OP : actualizar(c)
+    activate OP
+      OP -> AM : enviar(mensaje)
+      activate AM
+        AM -> PM : send(mensaje)
+        activate PM
+        PM --> AM : ack
+        deactivate PM
+      deactivate AM
+    deactivate OP
+
+  end
+
+deactivate C
 @enduml

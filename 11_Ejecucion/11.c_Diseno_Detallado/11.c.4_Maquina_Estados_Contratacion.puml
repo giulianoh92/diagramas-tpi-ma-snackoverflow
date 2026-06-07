@@ -1,5 +1,6 @@
 @startuml
 title 11.c — Máquina de estados · Ciclo de vida de la Contratación (UC09)
+hide empty description
 
 !include ../../00_Comun/00.0_Estilo_Comun.iuml
 

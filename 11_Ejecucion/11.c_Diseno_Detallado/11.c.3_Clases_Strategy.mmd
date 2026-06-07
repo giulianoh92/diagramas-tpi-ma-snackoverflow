@@ -1,0 +1,29 @@
+---
+config:
+  layout: elk
+  class:
+    hideEmptyMembersBox: true
+  theme: neutral
+title: "11.c — Clases de diseño · Patrón Strategy (orden de resultados de búsqueda)"
+---
+classDiagram
+    class BuscadorPrestadores {
+        - estrategia : EstrategiaRanking
+        + setEstrategia(e : EstrategiaRanking)
+        + buscar(criterios) : Prestador[*]
+    }
+
+    class EstrategiaRanking {
+        <<interface>>
+        + ordenar(prestadores : Prestador[\*]) : Prestador[\*]
+    }
+
+    class RankingPorCercania
+    class RankingPorReputacion
+    class RankingPorPrecio
+
+    EstrategiaRanking <|.. RankingPorCercania
+    EstrategiaRanking <|.. RankingPorReputacion
+    EstrategiaRanking <|.. RankingPorPrecio
+
+    BuscadorPrestadores o--> EstrategiaRanking : "«Strategy» Context"
