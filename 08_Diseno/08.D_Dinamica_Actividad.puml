@@ -1,5 +1,5 @@
 @startuml
-title Diseño
+title Disciplina de Diseño
 
 !include ../00_Comun/00.0_Estilo_Comun.iuml
 

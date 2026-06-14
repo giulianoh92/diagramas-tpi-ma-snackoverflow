@@ -1,5 +1,5 @@
 @startuml
-title Verificación
+title Disciplina de Verificación
 
 !include ../00_Comun/00.0_Estilo_Comun.iuml
 
