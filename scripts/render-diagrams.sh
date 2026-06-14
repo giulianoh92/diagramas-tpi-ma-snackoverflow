@@ -15,6 +15,7 @@ if ! docker pull -q "$PLANTUML_IMAGE" >/dev/null; then
 fi
 
 rendered=()
+rendered_svg=()
 failed=()
 skipped=()
 found=0
@@ -27,12 +28,13 @@ is_empty_source() {
 render_mermaid() {
   local src="$1"
   local out="${src%.mmd}.png"
+  local out_svg="${src%.mmd}.svg"
   if is_empty_source "$src"; then
     echo "→ skip (empty): $src"
     skipped+=("$src")
     return 0
   fi
-  echo "→ mermaid: $src"
+  echo "→ mermaid (png): $src"
   if docker run --rm \
       -u "$(id -u):$(id -g)" \
       -v "$PWD:/data" \
@@ -47,17 +49,31 @@ render_mermaid() {
     echo "  FAIL: $src" >&2
     failed+=("$src")
   fi
+  echo "→ mermaid (svg): $src"
+  if docker run --rm \
+      -u "$(id -u):$(id -g)" \
+      -v "$PWD:/data" \
+      "$MERMAID_IMAGE" \
+      -i "/data/$src" \
+      -o "/data/$out_svg" \
+      -b white; then
+    rendered_svg+=("$out_svg")
+  else
+    echo "  FAIL (svg): $src" >&2
+    failed+=("$src (svg)")
+  fi
 }
 
 render_plantuml() {
   local src="$1"
   local out="${src%.puml}.png"
+  local out_svg="${src%.puml}.svg"
   if is_empty_source "$src"; then
     echo "→ skip (empty): $src"
     skipped+=("$src")
     return 0
   fi
-  echo "→ plantuml: $src"
+  echo "→ plantuml (png): $src"
   if docker run --rm \
       -u "$(id -u):$(id -g)" \
       -e PLANTUML_LIMIT_SIZE=16384 \
@@ -70,6 +86,19 @@ render_plantuml() {
   else
     echo "  FAIL: $src" >&2
     failed+=("$src")
+  fi
+  echo "→ plantuml (svg): $src"
+  if docker run --rm \
+      -u "$(id -u):$(id -g)" \
+      -e PLANTUML_LIMIT_SIZE=16384 \
+      -v "$PWD:/data" \
+      "$PLANTUML_IMAGE" \
+      -tsvg \
+      "/data/$src"; then
+    rendered_svg+=("$out_svg")
+  else
+    echo "  FAIL (svg): $src" >&2
+    failed+=("$src (svg)")
   fi
 }
 
@@ -105,7 +134,8 @@ fi
 
 echo ""
 echo "=== Summary ==="
-echo "Rendered: ${#rendered[@]}"
+echo "Rendered PNG: ${#rendered[@]}"
+echo "Rendered SVG: ${#rendered_svg[@]}"
 echo "Skipped:  ${#skipped[@]}"
 echo "Failed:   ${#failed[@]}"
 if [[ "${#skipped[@]}" -gt 0 ]]; then
