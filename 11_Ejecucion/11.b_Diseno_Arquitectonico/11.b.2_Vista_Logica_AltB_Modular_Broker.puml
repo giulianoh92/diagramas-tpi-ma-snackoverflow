@@ -5,7 +5,9 @@ title 11.b — Vista lógica · Alternativa B: Monolito modular + Broker (Puerto
 
 skinparam componentStyle uml2
 skinparam backgroundColor transparent
-
+skinparam class {
+  BackgroundColor White
+}
 actor "Cliente / Prestador\n/ Administrador" as Usuario
 
 package "Capa de Presentación" as P {
