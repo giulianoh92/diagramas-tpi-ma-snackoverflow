@@ -1,0 +1,86 @@
+@startuml snack_overflow
+
+hide empty member
+hide stereotype
+
+scale 2.0
+
+!$estilo_modelo = "<<(M, #7A9DC8) modelo>>"
+!$estilo_proceso = "<<(P, #7CBB9F) proceso>>"
+!$estilo_practica = "<<(R, #D3A779) practica>>"
+
+skinparam class {
+	HeaderBackgroundColor<<modelo>>  #D7E5F1
+	HeaderBackgroundColor<<proceso>>  #D5EBE1
+	HeaderBackgroundColor<<practica>>  #F1E5D1
+}
+
+package "Leyenda" {
+	class leyendamodelo as "Modelos de Procesos" $estilo_modelo
+	class leyendaproceso as "Procesos Específicos" $estilo_proceso
+	class leyendapractica as "Prácticas" $estilo_practica
+
+	leyendamodelo -[hidden]-> leyendaproceso
+	leyendaproceso -[hidden]-> leyendapractica
+}
+
+class modelodeproceso as "Modelo de Proceso de Software" $estilo_modelo
+class prescriptivo as "Prescriptivos (basados en un plan)" $estilo_modelo
+modelodeproceso <|-- prescriptivo
+class cascada as "Modelo en Cascada" $estilo_modelo
+prescriptivo <|-- cascada
+class stradis as "STRADIS" $estilo_proceso
+cascada <|-- stradis
+class vmodel as "V-Model" $estilo_modelo
+cascada <|-- vmodel
+class vmodellxt as "V-Modell XT" $estilo_proceso
+vmodel <|-- vmodellxt
+
+class up as "Proceso Unificado" $estilo_modelo
+prescriptivo <|-- up
+class rup as "Rational Unified Process" $estilo_proceso
+up <|-- rup
+class openup as "OpenUP" $estilo_proceso
+up <|-- openup
+
+class evolutivo as "Proceso Evolutivo" $estilo_modelo
+prescriptivo <|-- evolutivo
+class boehm as "Espiral de Boehm" $estilo_modelo
+evolutivo <|-- boehm
+class winwin as "Modelo Win-Win" $estilo_proceso
+boehm <|-- winwin
+class mbase as "MBASE" $estilo_proceso
+boehm <|-- mbase
+
+class agiles as "Ágiles" $estilo_modelo
+modelodeproceso <|-- agiles
+class xp as "Programación Extrema (XP)" $estilo_proceso
+agiles <|-- xp
+class scrum as "Scrum" $estilo_proceso
+agiles <|-- scrum
+class kanban as "Kanban" $estilo_proceso
+agiles <|-- kanban
+class devops as "DevOps" $estilo_proceso
+agiles <|-- devops
+
+class practicas as "Prácticas" $estilo_practica
+
+abstract incremental as "Desarrollo Incremental" $estilo_practica
+practicas <|-- incremental
+abstract prototipado as "Prototipado" $estilo_practica
+practicas <|-- prototipado
+incremental <|-- prototipado
+abstract integracionyconfig as "Integración y Configuración" $estilo_practica
+practicas <|-- integracionyconfig
+abstract enfoque as "Enfoques Dirigidos por Artefacto" $estilo_practica
+practicas <|-- enfoque
+abstract mde as "Ingeniería dirigida por modelos (MDE)" $estilo_practica
+enfoque <|-- mde
+abstract mda as "Arquitectura dirigida por modelos (MDA)" $estilo_practica
+mde <|-- mda
+abstract sdd as "Spec-Drive Development (SDD)" $estilo_practica
+enfoque <|-- sdd
+
+winwin -[hidden]-> practicas
+xp -[hidden]-> Leyenda
+@enduml

@@ -4,6 +4,7 @@ title 11.b — Vista lógica · Alternativa B: Monolito modular + Broker (Puerto
 !include ../../00_Comun/00.0_Estilo_Comun.iuml
 
 skinparam componentStyle uml2
+skinparam backgroundColor transparent
 
 actor "Cliente / Prestador\n/ Administrador" as Usuario
 
@@ -64,4 +65,5 @@ MHab --> AHab
 APag --> MP
 AMsg --> MS
 AHab --> OR
+
 @enduml
